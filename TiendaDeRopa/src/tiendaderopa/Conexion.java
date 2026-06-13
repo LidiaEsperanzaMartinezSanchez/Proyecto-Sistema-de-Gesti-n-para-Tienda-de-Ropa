@@ -8,7 +8,7 @@ public class Conexion {
     
     private static final String URL = "jdbc:mysql://localhost:3306/TiendaRopa";
     private static final String USER = "root";
-    private static final String PASS = "134679";
+    private static final String PASS = "Lidia2026*";
 
     public static Connection getconnection() {
         Connection con = null;

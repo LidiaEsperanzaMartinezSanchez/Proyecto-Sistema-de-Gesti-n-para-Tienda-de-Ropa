@@ -1,199 +1,278 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package tiendaderopa;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
-/**
- *
- * @author webon
- */
 public class TiendaDeRopa {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Consultar dao = new Consultar();
 
-        ArrayList<Prenda> inventario = new ArrayList<>();
-        ArrayList<Cliente> clientes = new ArrayList<>();
-        ArrayList<Categoria> categorias = new ArrayList<>();
-        ArrayList<Vendedor> vendedores = new ArrayList<>();
+        int opcion;
 
-        int opcion = 0;
+        do {
 
-        while (opcion != 6) {
-
-            System.out.println("\n===== TIENDA DE ROPA =====");
-            System.out.println("1. Registrar Prenda");
-            System.out.println("2. Registrar Cliente");
-            System.out.println("3. Registrar Categoria");
-            System.out.println("4. Registrar Vendedor");
-            System.out.println("5. Mostrar Registros");
-            System.out.println("6. Salir");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("\n==============================");
+            System.out.println("      TIENDA DE ROPA");
+            System.out.println("==============================");
+            System.out.println("1. Clientes");
+            System.out.println("2. Prendas");
+            System.out.println("3. Categorias");
+            System.out.println("4. Vendedores");
+            System.out.println("5. Ventas");
+            System.out.println("6. Exportar TXT");
+            System.out.println("7. Importar TXT");
+            System.out.println("8. Salir");
+            System.out.print("Opcion: ");
 
             opcion = sc.nextInt();
             sc.nextLine();
 
-            if (opcion == 1) {
+            switch (opcion) {
 
-                System.out.println("\n=== REGISTRO DE PRENDA ===");
+                // ================= CLIENTES =================
+                case 1:
 
-                System.out.print("ID Prenda: ");
-                int idPrenda = sc.nextInt();
-                sc.nextLine();
+                    System.out.println("\n--- CLIENTES ---");
+                    System.out.println("1. Registrar");
+                    System.out.println("2. Listar");
+                    System.out.println("3. Actualizar");
+                    System.out.println("4. Eliminar");
 
-                System.out.print("Nombre: ");
-                String nombre = sc.nextLine();
+                    int c1 = sc.nextInt();
+                    sc.nextLine();
 
-                System.out.print("Talla: ");
-                String talla = sc.nextLine();
+                    if (c1 == 1) {
 
-                System.out.print("Color: ");
-                String color = sc.nextLine();
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
 
-                System.out.print("Precio: ");
-                double precio = sc.nextDouble();
+                        System.out.print("Email: ");
+                        String email = sc.nextLine();
 
-                System.out.print("Stock: ");
-                int stock = sc.nextInt();
+                        System.out.print("Telefono: ");
+                        String tel = sc.nextLine();
 
-                System.out.print("ID Categoria: ");
-                int idCategoria = sc.nextInt();
-                sc.nextLine();
+                        System.out.print("Direccion: ");
+                        String dir = sc.nextLine();
 
-                Prenda prenda = new Prenda(idPrenda, nombre, talla, color, precio, stock, idCategoria);
+                        Cliente c = new Cliente(0, nombre, email, tel, dir);
+                        dao.insertarCliente(c);
 
-                inventario.add(prenda);
+                    } else if (c1 == 2) {
 
-                System.out.println("Prenda registrada correctamente.");
+                        for (Cliente cl : dao.listarClientes()) {
+                            cl.mostrarDatos();
+                            System.out.println("-------------------");
+                        }
 
-                
-            } else if (opcion == 2) {
+                    } else if (c1 == 3) {
 
-                System.out.println("\n=== REGISTRO DE CLIENTE ===");
+                        System.out.print("ID Cliente: ");
+                        int id = sc.nextInt();
+                        sc.nextLine();
 
-                System.out.print("ID Cliente: ");
-                int idCliente = sc.nextInt();
-                sc.nextLine();
+                        System.out.print("Nuevo nombre: ");
+                        String nombre = sc.nextLine();
 
-                System.out.print("Nombre: ");
-                String nombre = sc.nextLine();
+                        System.out.print("Nuevo email: ");
+                        String email = sc.nextLine();
 
-                System.out.print("Email: ");
-                String email = sc.nextLine();
+                        System.out.print("Nuevo telefono: ");
+                        String tel = sc.nextLine();
 
-                System.out.print("Telefono: ");
-                String telefono = sc.nextLine();
+                        System.out.print("Nueva direccion: ");
+                        String dir = sc.nextLine();
 
-                System.out.print("Direccion: ");
-                String direccion = sc.nextLine();
+                        Cliente c = new Cliente(id, nombre, email, tel, dir);
+                        dao.actualizarCliente(c);
 
-                Cliente cliente = new Cliente(idCliente, nombre, email, telefono, direccion);
+                    } else if (c1 == 4) {
 
-                clientes.add(cliente);
+                        System.out.print("ID a eliminar: ");
+                        int id = sc.nextInt();
+                        dao.eliminarCliente(id);
+                    }
 
-                System.out.println("Cliente registrado correctamente.");
-                
+                    break;
 
-            } else if (opcion == 3) {
+                // ================= PRENDAS =================
+                case 2:
 
-                System.out.println("\n=== REGISTRO DE CATEGORIA ===");
+                    System.out.println("\n--- PRENDAS ---");
+                    System.out.println("1. Registrar");
+                    System.out.println("2. Listar");
+                    System.out.println("3. Actualizar stock");
+                    System.out.println("4. Eliminar");
 
-                System.out.print("ID Categoria: ");
-                int idCategoria = sc.nextInt();
-                sc.nextLine();
+                    int p1 = sc.nextInt();
+                    sc.nextLine();
 
-                System.out.print("Nombre Categoria: ");
-                String nombreCategoria = sc.nextLine();
+                    if (p1 == 1) {
 
-                System.out.print("Descripcion: ");
-                String descripcion = sc.nextLine();
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
 
-                Categoria categoria = new Categoria(idCategoria, nombreCategoria,descripcion);
+                        System.out.print("Talla: ");
+                        String talla = sc.nextLine();
 
-                categorias.add(categoria);
+                        System.out.print("Color: ");
+                        String color = sc.nextLine();
 
-                System.out.println("Categoria registrada correctamente.");
-                
+                        System.out.print("Precio: ");
+                        double precio = sc.nextDouble();
 
-            } else if (opcion == 4) {
+                        System.out.print("Stock: ");
+                        int stock = sc.nextInt();
 
-                System.out.println("\n=== REGISTRO DE VENDEDOR ===");
+                        System.out.print("ID Categoria: ");
+                        int idCat = sc.nextInt();
+                        sc.nextLine();
 
-                System.out.print("ID Vendedor: ");
-                int idVendedor = sc.nextInt();
-                sc.nextLine();
+                        if (precio > 0 && stock >= 0) {
 
-                System.out.print("Nombre: ");
-                String nombre = sc.nextLine();
+                            if (dao.existeCategoria(idCat)) {
 
-                System.out.print("Email: ");
-                String email = sc.nextLine();
+                                Prenda p = new Prenda(0, nombre, talla, color, precio, stock, idCat);
+                                dao.insertarPrenda(p);
 
-                System.out.print("Puesto: ");
-                String puesto = sc.nextLine();
+                                System.out.println("✔ Prenda registrada correctamente");
 
-                Vendedor vendedor = new Vendedor(idVendedor, nombre, email, puesto);
+                            } else {
+                                System.out.println("❌ Categoria no existe");
+                            }
 
-                vendedores.add(vendedor);
+                        } else {
+                            System.out.println("❌ Datos invalidos");
+                        }
 
-                System.out.println("Vendedor registrado correctamente.");
-                
+                    } else if (p1 == 2) {
 
-            } else if (opcion == 5) {
+                        for (Prenda pr : dao.listarPrendas()) {
+                            System.out.println(pr.getNombre() + " - $" + pr.getPrecio());
+                        }
 
-                System.out.println("\n===== PRENDAS =====");
+                    } else if (p1 == 3) {
 
-                for (Prenda p : inventario) {
-                    System.out.println("ID: " + p.getIdPrenda());
-                    System.out.println("Nombre: " + p.getNombre());
-                    System.out.println("Talla: " + p.getTalla());
-                    System.out.println("Color: " + p.getColor());
-                    System.out.println("Precio: $" + p.getPrecio());
-                    System.out.println("Stock: " + p.getStock());
-                    System.out.println("ID Categoria: " + p.getIdCategoria());
-                    System.out.println("----------------------");
-                }
+                        System.out.print("ID prenda: ");
+                        int id = sc.nextInt();
 
-                System.out.println("\n===== CLIENTES =====");
+                        System.out.print("Nuevo stock: ");
+                        int stock = sc.nextInt();
 
-                for (Cliente c : clientes) {
-                    c.mostrarDatos();
-                    System.out.println("----------------------");
-                }
+                        dao.actualizarPrendaStock(id, stock);
 
-                System.out.println("\n===== CATEGORIAS =====");
+                    } else if (p1 == 4) {
 
-                for (Categoria c : categorias) {
-                    System.out.println("ID: " + c.getIdCategoria());
-                    System.out.println("Nombre: " + c.getNombre());
-                    System.out.println("Descripcion: " + c.getDescripcion());
-                    System.out.println("----------------------");
-                }
+                        System.out.print("ID a eliminar: ");
+                        int id = sc.nextInt();
 
-                System.out.println("\n===== VENDEDORES =====");
+                        dao.eliminarPrenda(id);
+                    }
 
-                for (Vendedor v : vendedores) {
-                    v.mostrarDatos();
-                    System.out.println("----------------------");
-                }
+                    break;
 
-            } else if (opcion == 6) {
+                // ================= CATEGORIAS =================
+                case 3:
 
-                System.out.println("Saliendo del sistema...");
+                    System.out.println("\n--- CATEGORIAS ---");
+                    System.out.println("1. Registrar");
+                    System.out.println("2. Listar");
 
-            } else {
+                    int cat1 = sc.nextInt();
+                    sc.nextLine();
 
-                System.out.println("Opcion no valida.");
+                    if (cat1 == 1) {
 
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
+
+                        System.out.print("Descripcion: ");
+                        String desc = sc.nextLine();
+
+                        Categoria c = new Categoria(0, nombre, desc);
+                        dao.insertarCategoria(c);
+
+                    } else if (cat1 == 2) {
+
+                        for (Categoria ca : dao.listarCategorias()) {
+                            System.out.println(ca.getNombre());
+                        }
+                    }
+
+                    break;
+
+                // ================= VENDEDORES =================
+                case 4:
+
+                    System.out.println("\n--- VENDEDORES ---");
+                    System.out.println("1. Registrar");
+                    System.out.println("2. Listar");
+
+                    int v1 = sc.nextInt();
+                    sc.nextLine();
+
+                    if (v1 == 1) {
+
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
+
+                        System.out.print("Email: ");
+                        String email = sc.nextLine();
+
+                        System.out.print("Puesto: ");
+                        String puesto = sc.nextLine();
+
+                        Vendedor v = new Vendedor(0, nombre, email, puesto);
+                        dao.insertarVendedor(v);
+
+                    } else if (v1 == 2) {
+
+                        for (Vendedor ve : dao.listarVendedores()) {
+                            ve.mostrarDatos();
+                        }
+                    }
+
+                    break;
+
+                // ================= VENTAS =================
+                case 5:
+
+                    for (Venta ve : dao.listarVentas()) {
+                        System.out.println("Venta #" + ve.getIdVenta());
+                        System.out.println("Total: $" + ve.getTotal());
+                    }
+
+                    break;
+
+                // ================= EXPORTAR =================
+                case 6:
+
+                    ImportarTXT.exportarClientes(dao.listarClientes());
+                    ImportarTXT.exportarPrendas(dao.listarPrendas());
+                    ImportarTXT.exportarVentas(dao.listarVentas());
+
+                    System.out.println("✔ Archivos exportados");
+                    break;
+
+                // ================= IMPORTAR =================
+                case 7:
+
+                    ImportarTXT imp = new ImportarTXT();
+                    imp.importarTodo();
+
+                    break;
+
+                case 8:
+                    System.out.println("Saliendo...");
+                    break;
+
+                default:
+                    System.out.println("Opcion invalida");
             }
-        }
+
+        } while (opcion != 8);
 
         sc.close();
     }
