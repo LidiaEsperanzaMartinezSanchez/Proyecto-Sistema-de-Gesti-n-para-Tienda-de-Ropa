@@ -1,6 +1,6 @@
 package tiendaderopa;
 
-public class Vendedor {
+public class Vendedor extends Persona{
     private int idVendedor;
     private String nombre;
     private String email;
@@ -46,5 +46,12 @@ public class Vendedor {
     }
     public void setPuesto(String puesto) { 
         this.puesto = puesto; 
+    }
+    
+    @Override
+    public void mostrarDatos() {
+        System.out.println("VENDEDOR");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Puesto: " + puesto);
     }
 }

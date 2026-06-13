@@ -1,6 +1,6 @@
 package tiendaderopa;
 
-public class Cliente {
+public class Cliente extends Persona {
     private int idCliente;
     private String nombre;
     private String email;
@@ -56,5 +56,12 @@ public class Cliente {
     }
     public void setDireccion(String direccion) { 
         this.direccion = direccion; 
+    }
+    
+    @Override
+    public void mostrarDatos() {
+        System.out.println("CLIENTE");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Telefono: " + telefono);
     }
 }
