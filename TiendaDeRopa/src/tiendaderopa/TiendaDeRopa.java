@@ -96,6 +96,36 @@ public class TiendaDeRopa {
                     }
 
                     break;
+                    
+                // ================= CATEGORIAS =================
+                case 3:
+
+                    System.out.println("\n--- CATEGORIAS ---");
+                    System.out.println("1. Registrar");
+                    System.out.println("2. Listar");
+
+                    int cat1 = sc.nextInt();
+                    sc.nextLine();
+
+                    if (cat1 == 1) {
+
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
+
+                        System.out.print("Descripcion: ");
+                        String desc = sc.nextLine();
+
+                        Categoria c = new Categoria(0, nombre, desc);
+                        dao.insertarCategoria(c);
+
+                    } else if (cat1 == 2) {
+
+                        for (Categoria ca : dao.listarCategorias()) {
+                            System.out.println(ca.getNombre());
+                        }
+                    }
+
+                    break;
 
                 // ================= PRENDAS =================
                 case 2:
@@ -137,14 +167,14 @@ public class TiendaDeRopa {
                                 Prenda p = new Prenda(0, nombre, talla, color, precio, stock, idCat);
                                 dao.insertarPrenda(p);
 
-                                System.out.println("✔ Prenda registrada correctamente");
+                                System.out.println("Prenda registrada correctamente");
 
                             } else {
-                                System.out.println("❌ Categoria no existe");
+                                System.out.println("Categoria no existe");
                             }
 
                         } else {
-                            System.out.println("❌ Datos invalidos");
+                            System.out.println("Datos invalidos");
                         }
 
                     } else if (p1 == 2) {
@@ -173,35 +203,6 @@ public class TiendaDeRopa {
 
                     break;
 
-                // ================= CATEGORIAS =================
-                case 3:
-
-                    System.out.println("\n--- CATEGORIAS ---");
-                    System.out.println("1. Registrar");
-                    System.out.println("2. Listar");
-
-                    int cat1 = sc.nextInt();
-                    sc.nextLine();
-
-                    if (cat1 == 1) {
-
-                        System.out.print("Nombre: ");
-                        String nombre = sc.nextLine();
-
-                        System.out.print("Descripcion: ");
-                        String desc = sc.nextLine();
-
-                        Categoria c = new Categoria(0, nombre, desc);
-                        dao.insertarCategoria(c);
-
-                    } else if (cat1 == 2) {
-
-                        for (Categoria ca : dao.listarCategorias()) {
-                            System.out.println(ca.getNombre());
-                        }
-                    }
-
-                    break;
 
                 // ================= VENDEDORES =================
                 case 4:
@@ -253,7 +254,7 @@ public class TiendaDeRopa {
                     ImportarTXT.exportarPrendas(dao.listarPrendas());
                     ImportarTXT.exportarVentas(dao.listarVentas());
 
-                    System.out.println("✔ Archivos exportados");
+                    System.out.println("Archivos exportados");
                     break;
 
                 // ================= IMPORTAR =================
