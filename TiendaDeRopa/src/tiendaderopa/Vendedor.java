@@ -1,57 +1,47 @@
 package tiendaderopa;
 
-public class Vendedor extends Persona{
+public class Vendedor extends Persona {
+
     private int idVendedor;
-    private String nombre;
-    private String email;
     private String puesto;
 
     public Vendedor() {
+        super();
         this.idVendedor = 0;
-        this.nombre = "";
-        this.email = "";
         this.puesto = "";
     }
 
-    public Vendedor(int idVendedor, String nombre, String email, String puesto) {
+    public Vendedor(int idVendedor, String nombre,
+                     String email, String puesto) {
+
+        super(idVendedor, nombre, email);
+
         this.idVendedor = idVendedor;
-        this.nombre = nombre;
-        this.email = email;
         this.puesto = puesto;
     }
 
-    public int getIdVendedor() { 
-        return idVendedor; 
-    }
-    public void setIdVendedor(int idVendedor) { 
-        this.idVendedor = idVendedor; 
+    public int getIdVendedor() {
+        return idVendedor;
     }
 
-    public String getNombre() { 
-        return nombre; 
-    }
-    public void setNombre(String nombre) { 
-        this.nombre = nombre; 
+    public void setIdVendedor(int idVendedor) {
+        this.idVendedor = idVendedor;
     }
 
-    public String getEmail() { 
-        return email; 
-    }
-    public void setEmail(String email) { 
-        this.email = email; 
+    public String getPuesto() {
+        return puesto;
     }
 
-    public String getPuesto() { 
-        return puesto; 
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
     }
-    public void setPuesto(String puesto) { 
-        this.puesto = puesto; 
-    }
-    
+
     @Override
     public void mostrarDatos() {
-        System.out.println("VENDEDOR");
+        System.out.println("===== VENDEDOR =====");
+        System.out.println("ID: " + idVendedor);
         System.out.println("Nombre: " + nombre);
+        System.out.println("Email: " + email);
         System.out.println("Puesto: " + puesto);
     }
 }

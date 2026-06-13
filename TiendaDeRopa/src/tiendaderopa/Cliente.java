@@ -1,67 +1,58 @@
 package tiendaderopa;
 
 public class Cliente extends Persona {
+
     private int idCliente;
-    private String nombre;
-    private String email;
     private String telefono;
     private String direccion;
 
     public Cliente() {
+        super();
         this.idCliente = 0;
-        this.nombre = "";
-        this.email = "";
         this.telefono = "";
         this.direccion = "";
     }
 
     public Cliente(int idCliente, String nombre, String email, String telefono, String direccion) {
+
+        super(idCliente, nombre, email);
+
         this.idCliente = idCliente;
-        this.nombre = nombre;
-        this.email = email;
         this.telefono = telefono;
         this.direccion = direccion;
     }
 
-    public int getIdCliente() { 
+    public int getIdCliente() {
         return idCliente;
     }
-    public void setIdCliente(int idCliente) { 
-        this.idCliente = idCliente; 
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public String getNombre() { 
-        return nombre; 
-    }
-    public void setNombre(String nombre) { 
-        this.nombre = nombre; 
+    public String getTelefono() {
+        return telefono;
     }
 
-    public String getEmail() { 
-        return email; 
-    }
-    public void setEmail(String email) { 
-        this.email = email; 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public String getTelefono() { 
-        return telefono; 
-    }
-    public void setTelefono(String telefono) { 
-        this.telefono = telefono; 
+    public String getDireccion() {
+        return direccion;
     }
 
-    public String getDireccion() { 
-        return direccion; 
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
-    public void setDireccion(String direccion) { 
-        this.direccion = direccion; 
-    }
-    
+
     @Override
     public void mostrarDatos() {
-        System.out.println("CLIENTE");
+        System.out.println("===== CLIENTE =====");
+        System.out.println("ID: " + idCliente);
         System.out.println("Nombre: " + nombre);
+        System.out.println("Email: " + email);
         System.out.println("Telefono: " + telefono);
+        System.out.println("Direccion: " + direccion);
     }
 }
