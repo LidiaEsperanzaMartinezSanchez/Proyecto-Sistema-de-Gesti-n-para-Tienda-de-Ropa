@@ -1,0 +1,8 @@
+ID: 4
+Nombre: Pantalon 
+Talla: 5
+Color: rosa
+Precio: $500.0
+Stock: 10
+ID Categoria: 6
+----------------------

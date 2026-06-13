@@ -16,9 +16,9 @@ public class TiendaDeRopa {
             System.out.println("\n==============================");
             System.out.println("      TIENDA DE ROPA");
             System.out.println("==============================");
-            System.out.println("1. Clientes");
+            System.out.println("1. Categorias");
             System.out.println("2. Prendas");
-            System.out.println("3. Categorias");
+            System.out.println("3. Clientes");
             System.out.println("4. Vendedores");
             System.out.println("5. Ventas");
             System.out.println("6. Exportar TXT");
@@ -30,75 +30,9 @@ public class TiendaDeRopa {
             sc.nextLine();
 
             switch (opcion) {
-
-                // ================= CLIENTES =================
-                case 1:
-
-                    System.out.println("\n--- CLIENTES ---");
-                    System.out.println("1. Registrar");
-                    System.out.println("2. Listar");
-                    System.out.println("3. Actualizar");
-                    System.out.println("4. Eliminar");
-
-                    int c1 = sc.nextInt();
-                    sc.nextLine();
-
-                    if (c1 == 1) {
-
-                        System.out.print("Nombre: ");
-                        String nombre = sc.nextLine();
-
-                        System.out.print("Email: ");
-                        String email = sc.nextLine();
-
-                        System.out.print("Telefono: ");
-                        String tel = sc.nextLine();
-
-                        System.out.print("Direccion: ");
-                        String dir = sc.nextLine();
-
-                        Cliente c = new Cliente(0, nombre, email, tel, dir);
-                        dao.insertarCliente(c);
-
-                    } else if (c1 == 2) {
-
-                        for (Cliente cl : dao.listarClientes()) {
-                            cl.mostrarDatos();
-                            System.out.println("-------------------");
-                        }
-
-                    } else if (c1 == 3) {
-
-                        System.out.print("ID Cliente: ");
-                        int id = sc.nextInt();
-                        sc.nextLine();
-
-                        System.out.print("Nuevo nombre: ");
-                        String nombre = sc.nextLine();
-
-                        System.out.print("Nuevo email: ");
-                        String email = sc.nextLine();
-
-                        System.out.print("Nuevo telefono: ");
-                        String tel = sc.nextLine();
-
-                        System.out.print("Nueva direccion: ");
-                        String dir = sc.nextLine();
-
-                        Cliente c = new Cliente(id, nombre, email, tel, dir);
-                        dao.actualizarCliente(c);
-
-                    } else if (c1 == 4) {
-
-                        System.out.print("ID a eliminar: ");
-                        int id = sc.nextInt();
-                        dao.eliminarCliente(id);
-                    }
-
-                    break;
                     
                 // ================= CATEGORIAS =================
-                case 3:
+                case 1:
 
                     System.out.println("\n--- CATEGORIAS ---");
                     System.out.println("1. Registrar");
@@ -203,6 +137,71 @@ public class TiendaDeRopa {
 
                     break;
 
+                // ================= CLIENTES =================
+                case 3:
+
+                    System.out.println("\n--- CLIENTES ---");
+                    System.out.println("1. Registrar");
+                    System.out.println("2. Listar");
+                    System.out.println("3. Actualizar");
+                    System.out.println("4. Eliminar");
+
+                    int c1 = sc.nextInt();
+                    sc.nextLine();
+
+                    if (c1 == 1) {
+
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
+
+                        System.out.print("Email: ");
+                        String email = sc.nextLine();
+
+                        System.out.print("Telefono: ");
+                        String tel = sc.nextLine();
+
+                        System.out.print("Direccion: ");
+                        String dir = sc.nextLine();
+
+                        Cliente c = new Cliente(0, nombre, email, tel, dir);
+                        dao.insertarCliente(c);
+
+                    } else if (c1 == 2) {
+
+                        for (Cliente cl : dao.listarClientes()) {
+                            cl.mostrarDatos();
+                            System.out.println("-------------------");
+                        }
+
+                    } else if (c1 == 3) {
+
+                        System.out.print("ID Cliente: ");
+                        int id = sc.nextInt();
+                        sc.nextLine();
+
+                        System.out.print("Nuevo nombre: ");
+                        String nombre = sc.nextLine();
+
+                        System.out.print("Nuevo email: ");
+                        String email = sc.nextLine();
+
+                        System.out.print("Nuevo telefono: ");
+                        String tel = sc.nextLine();
+
+                        System.out.print("Nueva direccion: ");
+                        String dir = sc.nextLine();
+
+                        Cliente c = new Cliente(id, nombre, email, tel, dir);
+                        dao.actualizarCliente(c);
+
+                    } else if (c1 == 4) {
+
+                        System.out.print("ID a eliminar: ");
+                        int id = sc.nextInt();
+                        dao.eliminarCliente(id);
+                    }
+
+                    break;                   
 
                 // ================= VENDEDORES =================
                 case 4:
