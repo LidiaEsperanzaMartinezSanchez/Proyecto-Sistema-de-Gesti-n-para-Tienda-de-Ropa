@@ -2,30 +2,25 @@ package tiendaderopa;
 
 public class Vendedor extends Persona {
 
-    private int idVendedor;
     private String puesto;
 
     public Vendedor() {
         super();
-        this.idVendedor = 0;
         this.puesto = "";
     }
 
-    public Vendedor(int idVendedor, String nombre,
-                     String email, String puesto) {
-
+    public Vendedor(int idVendedor, String nombre, String email, String puesto) {
         super(idVendedor, nombre, email);
-
-        this.idVendedor = idVendedor;
         this.puesto = puesto;
     }
 
+    // Alias que apunta al id de Persona — sin duplicar
     public int getIdVendedor() {
-        return idVendedor;
+        return this.id;
     }
 
     public void setIdVendedor(int idVendedor) {
-        this.idVendedor = idVendedor;
+        this.id = idVendedor;
     }
 
     public String getPuesto() {
@@ -39,9 +34,9 @@ public class Vendedor extends Persona {
     @Override
     public void mostrarDatos() {
         System.out.println("===== VENDEDOR =====");
-        System.out.println("ID: " + idVendedor);
+        System.out.println("ID: "     + this.id);
         System.out.println("Nombre: " + nombre);
-        System.out.println("Email: " + email);
+        System.out.println("Email: "  + email);
         System.out.println("Puesto: " + puesto);
     }
 }

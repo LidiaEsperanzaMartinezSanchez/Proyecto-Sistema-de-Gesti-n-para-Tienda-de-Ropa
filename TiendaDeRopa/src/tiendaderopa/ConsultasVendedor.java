@@ -1,15 +1,12 @@
 package tiendaderopa;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConsultasVendedor {
-    public void insertarVendedor(Vendedor v) {
 
+    public void insertarVendedor(Vendedor v) {
         String sql = "INSERT INTO vendedor(nombre, email, puesto) VALUES (?, ?, ?)";
 
         try (Connection con = Conexion.getconnection();
@@ -22,12 +19,11 @@ public class ConsultasVendedor {
             ps.executeUpdate();
 
         } catch (Exception e) {
-            System.out.println("Error vendedor: " + e.getMessage());
+            System.out.println("Error insertar vendedor: " + e.getMessage());
         }
     }
 
     public List<Vendedor> consultarVendedores() {
-
         List<Vendedor> lista = new ArrayList<>();
         String sql = "SELECT * FROM vendedor";
 
@@ -36,14 +32,11 @@ public class ConsultasVendedor {
              ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
-
                 Vendedor v = new Vendedor();
-
                 v.setIdVendedor(rs.getInt("idVendedor"));
                 v.setNombre(rs.getString("nombre"));
                 v.setEmail(rs.getString("email"));
                 v.setPuesto(rs.getString("puesto"));
-
                 lista.add(v);
             }
 
@@ -55,7 +48,6 @@ public class ConsultasVendedor {
     }
 
     public void actualizarVendedor(Vendedor v) {
-
         String sql = "UPDATE vendedor SET nombre=?, email=?, puesto=? WHERE idVendedor=?";
 
         try (Connection con = Conexion.getconnection();
@@ -74,7 +66,6 @@ public class ConsultasVendedor {
     }
 
     public void eliminarVendedor(int id) {
-
         String sql = "DELETE FROM vendedor WHERE idVendedor=?";
 
         try (Connection con = Conexion.getconnection();
@@ -85,6 +76,23 @@ public class ConsultasVendedor {
 
         } catch (Exception e) {
             System.out.println("Error eliminar vendedor: " + e.getMessage());
+        }
+    }
+
+    // ===== EXISTE VENDEDOR =====
+    public boolean existeVendedor(int idVendedor) {
+        String sql = "SELECT idVendedor FROM vendedor WHERE idVendedor=?";
+
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idVendedor);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+
+        } catch (Exception e) {
+            System.out.println("Error verificar vendedor: " + e.getMessage());
+            return false;
         }
     }
 }

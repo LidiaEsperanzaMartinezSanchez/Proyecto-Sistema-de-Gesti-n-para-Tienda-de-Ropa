@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsultasCliente {
-    public void insertarCliente(Cliente c) {
 
+    public void insertarCliente(Cliente c) {
         String sql = "INSERT INTO cliente(nombre, email, telefono, direccion) VALUES (?, ?, ?, ?)";
 
         try (Connection con = Conexion.getconnection();
@@ -20,12 +20,11 @@ public class ConsultasCliente {
             ps.executeUpdate();
 
         } catch (Exception e) {
-            System.out.println("Error cliente: " + e.getMessage());
+            System.out.println("Error insertar cliente: " + e.getMessage());
         }
     }
 
     public List<Cliente> consultarClientes() {
-
         List<Cliente> lista = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
 
@@ -35,13 +34,11 @@ public class ConsultasCliente {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-
                 c.setIdCliente(rs.getInt("idCliente"));
                 c.setNombre(rs.getString("nombre"));
                 c.setEmail(rs.getString("email"));
                 c.setTelefono(rs.getString("telefono"));
                 c.setDireccion(rs.getString("direccion"));
-
                 lista.add(c);
             }
 
@@ -53,7 +50,6 @@ public class ConsultasCliente {
     }
 
     public void actualizarCliente(Cliente c) {
-
         String sql = "UPDATE cliente SET nombre=?, email=?, telefono=?, direccion=? WHERE idCliente=?";
 
         try (Connection con = Conexion.getconnection();
@@ -73,7 +69,6 @@ public class ConsultasCliente {
     }
 
     public void eliminarCliente(int id) {
-
         String sql = "DELETE FROM cliente WHERE idCliente=?";
 
         try (Connection con = Conexion.getconnection();
@@ -84,6 +79,23 @@ public class ConsultasCliente {
 
         } catch (Exception e) {
             System.out.println("Error eliminar cliente: " + e.getMessage());
+        }
+    }
+
+    // ===== EXISTE CLIENTE =====
+    public boolean existeCliente(int idCliente) {
+        String sql = "SELECT idCliente FROM cliente WHERE idCliente=?";
+
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idCliente);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+
+        } catch (Exception e) {
+            System.out.println("Error verificar cliente: " + e.getMessage());
+            return false;
         }
     }
 }

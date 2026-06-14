@@ -4,13 +4,18 @@ import java.io.*;
 import java.util.List;
 
 public class ImportarTXT {
+
+    // ── DAOs separados ──────────────────────────────────────────────────────────
     private final ConsultasCliente      daoCliente      = new ConsultasCliente();
     private final ConsultasPrenda       daoPrenda       = new ConsultasPrenda();
     private final ConsultasVenta        daoVenta        = new ConsultasVenta();
     private final ConsultasDetalleVenta daoDetalleVenta = new ConsultasDetalleVenta();
     private final ConsultasCategoria    daoCategoria    = new ConsultasCategoria();
+    private final ConsultasVendedor     daoVendedor     = new ConsultasVendedor();
 
-    //  EXPORTAR //
+    // ═══════════════════════════════════════════════════════════════════════════
+    //  EXPORTAR
+    // ═══════════════════════════════════════════════════════════════════════════
 
     public static void exportarClientes(List<Cliente> lista) {
         try (PrintWriter pw = new PrintWriter(new FileWriter("clientes.txt"))) {
@@ -79,7 +84,9 @@ public class ImportarTXT {
         }
     }
 
-    // IMPORTAR //
+    // ═══════════════════════════════════════════════════════════════════════════
+    //  IMPORTAR
+    // ═══════════════════════════════════════════════════════════════════════════
 
     public void importarTodo() {
         importarClientes();
@@ -89,7 +96,7 @@ public class ImportarTXT {
         System.out.println("Importación completa");
     }
 
-    // Clientes  
+    // ── Clientes ────────────────────────────────────────────────────────────────
     public void importarClientes() {
         try (BufferedReader br = new BufferedReader(new FileReader("clientes.txt"))) {
             String linea;
@@ -120,7 +127,7 @@ public class ImportarTXT {
         }
     }
 
-    // Prendas 
+    // ── Prendas ─────────────────────────────────────────────────────────────────
     public void importarPrendas() {
         try (BufferedReader br = new BufferedReader(new FileReader("prendas.txt"))) {
             String linea;
@@ -160,7 +167,7 @@ public class ImportarTXT {
         }
     }
 
-    // Ventas  
+    // ── Ventas ──────────────────────────────────────────────────────────────────
     public void importarVentas() {
         try (BufferedReader br = new BufferedReader(new FileReader("ventas.txt"))) {
             String linea;
@@ -181,7 +188,15 @@ public class ImportarTXT {
                     if (linea.startsWith("ID Vendedor:")) v.setIdVendedor(Integer.parseInt(valor(linea, "ID Vendedor:")));
 
                     if (linea.startsWith("------")) {
-                        daoVenta.insertarVenta(v);
+                        if (!daoCliente.existeCliente(v.getIdCliente())) {
+                            System.out.println("Cliente " + v.getIdCliente()
+                                + " no existe. Venta omitida.");
+                        } else if (!daoVendedor.existeVendedor(v.getIdVendedor())) {
+                            System.out.println("Vendedor " + v.getIdVendedor()
+                                + " no existe. Venta omitida.");
+                        } else {
+                            daoVenta.insertarVenta(v);
+                        }
                         v = null;
                     }
                 }
@@ -192,7 +207,7 @@ public class ImportarTXT {
         }
     }
 
-    // Detalle Venta 
+    // ── Detalle Venta ────────────────────────────────────────────────────────────
     public void importarDetalleVenta() {
         try (BufferedReader br = new BufferedReader(new FileReader("detalleventa.txt"))) {
             String linea;
