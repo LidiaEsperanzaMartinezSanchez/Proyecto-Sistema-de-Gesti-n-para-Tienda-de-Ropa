@@ -1,8 +1,8 @@
 ID: 3
-Nombre: juan 
-Email: juanperez@gmail.com
-Telefono: 567 123
-Direccion: unsji
+Nombre: monse
+Email: monse@gmail.com
+Telefono: 234 567 8978
+Direccion: unsij
 ----------------------
 ID: 4
 Nombre: Ana
@@ -26,5 +26,11 @@ ID: 7
 Nombre: Laura
 Email: laura@gmail.com
 Telefono: 951 123 3456
+Direccion: unsij
+----------------------
+ID: 19
+Nombre: yeni
+Email: yeni@gmail.com
+Telefono: 678 345 2345 
 Direccion: unsij
 ----------------------

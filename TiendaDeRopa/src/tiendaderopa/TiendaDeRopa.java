@@ -23,7 +23,6 @@ public class TiendaDeRopa {
             System.out.println("5. Ventas");
             System.out.println("6. Detalle Venta");
             System.out.println("7. Exportar TXT");
-            System.out.println("8. Importar TXT");
             System.out.println("9. Salir");
             System.out.print("Opcion: ");
 
@@ -376,15 +375,18 @@ public class TiendaDeRopa {
                     break;
                 }
 
-                case 7:
-                    System.out.println("Exportando...");
+                case 7: {
+
+                    ImportarTXT.exportarClientes(dao.consultarClientes());
+                    ImportarTXT.exportarPrendas(dao.consultarPrendas());
+                    ImportarTXT.exportarVentas(dao.consultarVentas());
+                    ImportarTXT.exportarDetalleVenta(dao.consultarDetalleVenta());
+
+                    System.out.println("Exportacion completada.");
                     break;
+                }
 
                 case 8:
-                    System.out.println("Importando...");
-                    break;
-
-                case 9:
                     System.out.println("Saliendo...");
                     break;
 
@@ -392,8 +394,10 @@ public class TiendaDeRopa {
                     System.out.println("Opcion invalida");
             }
 
-        } while (opcion != 9);
+        } while (opcion != 8);
 
         sc.close();
     }
 }
+
+
