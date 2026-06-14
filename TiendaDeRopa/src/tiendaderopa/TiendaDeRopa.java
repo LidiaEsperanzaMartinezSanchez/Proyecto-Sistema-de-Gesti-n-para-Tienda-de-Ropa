@@ -7,7 +7,7 @@ public class TiendaDeRopa {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Consultar dao = new Consultar();
+        ConsultasCliente dao = new ConsultasCliente();
 
         int opcion;
 
