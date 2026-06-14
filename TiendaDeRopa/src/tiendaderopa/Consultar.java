@@ -7,14 +7,12 @@ import java.util.List;
 public class Consultar {
 
     // ===================== CLIENTE =====================
-    
-    //---------------------- Insertar cliente ------------------------
-    
     public void insertarCliente(Cliente c) {
 
         String sql = "INSERT INTO cliente(nombre, email, telefono, direccion) VALUES (?, ?, ?, ?)";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, c.getNombre());
             ps.setString(2, c.getEmail());
@@ -28,17 +26,16 @@ public class Consultar {
         }
     }
 
-    //---------------------- Listar clientes ------------------------------------
-    
-    public List<Cliente> listarClientes() {
+    public List<Cliente> consultarClientes() {
 
         List<Cliente> lista = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
 
-        try (Connection con = Conexion.getconnection(); Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        try (Connection con = Conexion.getconnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
-
                 Cliente c = new Cliente();
 
                 c.setIdCliente(rs.getInt("idCliente"));
@@ -51,19 +48,18 @@ public class Consultar {
             }
 
         } catch (Exception e) {
-            System.out.println("Error listar clientes: " + e.getMessage());
+            System.out.println("Error consultar clientes: " + e.getMessage());
         }
 
         return lista;
     }
 
-    //----------------------- Actualizar cliente --------------------------------
-    
     public void actualizarCliente(Cliente c) {
 
         String sql = "UPDATE cliente SET nombre=?, email=?, telefono=?, direccion=? WHERE idCliente=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, c.getNombre());
             ps.setString(2, c.getEmail());
@@ -78,13 +74,12 @@ public class Consultar {
         }
     }
 
-    //----------------------------- Eliminar cliente --------------------------
-    
     public void eliminarCliente(int id) {
 
         String sql = "DELETE FROM cliente WHERE idCliente=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -94,15 +89,13 @@ public class Consultar {
         }
     }
 
-    // ============================= PRENDA ================================
-    
-    // --------------------- Insertar prenda ---------------------------------
-    
+    // ===================== PRENDA =====================
     public void insertarPrenda(Prenda p) {
 
         String sql = "INSERT INTO prenda(nombre, talla, color, precio, stock, idCategoria) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, p.getNombre());
             ps.setString(2, p.getTalla());
@@ -118,13 +111,14 @@ public class Consultar {
         }
     }
 
-    //--------------------- Listar prendas -----------------------------------
-    public List<Prenda> listarPrendas() {
+    public List<Prenda> consultarPrendas() {
 
         List<Prenda> lista = new ArrayList<>();
         String sql = "SELECT * FROM prenda";
 
-        try (Connection con = Conexion.getconnection(); Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        try (Connection con = Conexion.getconnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
 
@@ -142,18 +136,18 @@ public class Consultar {
             }
 
         } catch (Exception e) {
-            System.out.println("Error listar prendas: " + e.getMessage());
+            System.out.println("Error consultar prendas: " + e.getMessage());
         }
 
         return lista;
     }
 
-    //------------------- Actualizar Prenda -----------------------------
     public void actualizarPrendaStock(int id, int stock) {
 
         String sql = "UPDATE prenda SET stock=? WHERE idPrenda=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, stock);
             ps.setInt(2, id);
@@ -165,12 +159,12 @@ public class Consultar {
         }
     }
 
-    //------------------------ Eliminar prenda -------------------------------
     public void eliminarPrenda(int id) {
 
         String sql = "DELETE FROM prenda WHERE idPrenda=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -181,14 +175,12 @@ public class Consultar {
     }
 
     // ===================== CATEGORIA =====================
-    
-    //--------------------- Insertar categoria --------------------------
-    
     public void insertarCategoria(Categoria c) {
 
         String sql = "INSERT INTO categoria(nombre, descripcion) VALUES (?, ?)";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, c.getNombre());
             ps.setString(2, c.getDescripcion());
@@ -200,14 +192,14 @@ public class Consultar {
         }
     }
 
-    //------------------- listar categorias ---------------------------------
-  
-    public List<Categoria> listarCategorias() {
+    public List<Categoria> consultarCategorias() {
 
         List<Categoria> lista = new ArrayList<>();
         String sql = "SELECT * FROM categoria";
 
-        try (Connection con = Conexion.getconnection(); Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        try (Connection con = Conexion.getconnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
 
@@ -221,37 +213,18 @@ public class Consultar {
             }
 
         } catch (Exception e) {
-            System.out.println("Error categorias: " + e.getMessage());
+            System.out.println("Error consultar categorias: " + e.getMessage());
         }
 
         return lista;
     }
 
-    // ---------------- existe categoria -------------------------------------
-    
-    public boolean existeCategoria(int id) {
-
-        String sql = "SELECT idCategoria FROM categoria WHERE idCategoria=?";
-
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-
-            return rs.next();
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    // --------------------------- Actualizar categoria ------------------------
-    
     public void actualizarCategoria(Categoria c) {
 
         String sql = "UPDATE categoria SET nombre=?, descripcion=? WHERE idCategoria=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, c.getNombre());
             ps.setString(2, c.getDescripcion());
@@ -264,16 +237,14 @@ public class Consultar {
         }
     }
 
-   // ----------------------------- Eliminar categoria -------------------------
-    
     public void eliminarCategoria(int id) {
 
         String sql = "DELETE FROM categoria WHERE idCategoria=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
-
             ps.executeUpdate();
 
         } catch (Exception e) {
@@ -281,15 +252,32 @@ public class Consultar {
         }
     }
 
+    // ===== EXISTE CATEGORIA (CORREGIDO) =====
+    public boolean existeCategoria(int idCategoria) {
+
+        String sql = "SELECT idCategoria FROM categoria WHERE idCategoria=?";
+
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idCategoria);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+
+        } catch (Exception e) {
+            System.out.println("Error verificar categoria: " + e.getMessage());
+            return false;
+        }
+    }
+
     // ===================== VENTA =====================
-    
-    //--------------------- Insertar venta -----------------------------------
-    
     public void insertarVenta(Venta v) {
 
         String sql = "INSERT INTO venta(fecha,total,metodoPago,idCliente,idVendedor) VALUES(?,?,?,?,?)";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, v.getFecha());
             ps.setDouble(2, v.getTotal());
@@ -304,13 +292,14 @@ public class Consultar {
         }
     }
 
-    // -------------------Listar venta ----------------------------
-    public List<Venta> listarVentas() {
+    public List<Venta> consultarVentas() {
 
         List<Venta> lista = new ArrayList<>();
         String sql = "SELECT * FROM venta";
 
-        try (Connection con = Conexion.getconnection(); Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        try (Connection con = Conexion.getconnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
 
@@ -327,19 +316,18 @@ public class Consultar {
             }
 
         } catch (Exception e) {
-            System.out.println("Error ventas: " + e.getMessage());
+            System.out.println("Error consultar ventas: " + e.getMessage());
         }
 
         return lista;
     }
 
-    //-------------------------- Actualizar venta ----------------------------------
-    
     public void actualizarVenta(Venta v) {
 
         String sql = "UPDATE venta SET fecha=?, total=?, metodoPago=?, idCliente=?, idVendedor=? WHERE idVenta=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, v.getFecha());
             ps.setDouble(2, v.getTotal());
@@ -354,17 +342,15 @@ public class Consultar {
             System.out.println("Error actualizar venta: " + e.getMessage());
         }
     }
-    
-    // ------------------------------- Eliminar venta --------------------------
 
     public void eliminarVenta(int id) {
 
         String sql = "DELETE FROM venta WHERE idVenta=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
-
             ps.executeUpdate();
 
         } catch (Exception e) {
@@ -373,14 +359,12 @@ public class Consultar {
     }
 
     // ===================== VENDEDOR =====================
-    
-    //----------------------- Insertar vendedor ----------------------
-    
     public void insertarVendedor(Vendedor v) {
 
         String sql = "INSERT INTO vendedor(nombre, email, puesto) VALUES (?, ?, ?)";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, v.getNombre());
             ps.setString(2, v.getEmail());
@@ -393,14 +377,14 @@ public class Consultar {
         }
     }
 
-    // -------------------- Listar vendedor ----------------------
-    
-    public List<Vendedor> listarVendedores() {
+    public List<Vendedor> consultarVendedores() {
 
         List<Vendedor> lista = new ArrayList<>();
         String sql = "SELECT * FROM vendedor";
 
-        try (Connection con = Conexion.getconnection(); Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        try (Connection con = Conexion.getconnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
 
@@ -415,19 +399,18 @@ public class Consultar {
             }
 
         } catch (Exception e) {
-            System.out.println("Error vendedores: " + e.getMessage());
+            System.out.println("Error consultar vendedores: " + e.getMessage());
         }
 
         return lista;
     }
 
-    // ---------------------- Actualizar vendedor -------------------------
-    
     public void actualizarVendedor(Vendedor v) {
 
         String sql = "UPDATE vendedor SET nombre=?, email=?, puesto=? WHERE idVendedor=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, v.getNombre());
             ps.setString(2, v.getEmail());
@@ -441,20 +424,102 @@ public class Consultar {
         }
     }
 
-    // ------------------------ Eliminar vendedor -----------------------
-    
     public void eliminarVendedor(int id) {
 
         String sql = "DELETE FROM vendedor WHERE idVendedor=?";
 
-        try (Connection con = Conexion.getconnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
-
             ps.executeUpdate();
 
         } catch (Exception e) {
             System.out.println("Error eliminar vendedor: " + e.getMessage());
+        }
+    }
+
+    // ===================== DETALLE VENTA =====================
+    public void insertarDetalleVenta(DetalleVenta d) {
+
+        String sql = "INSERT INTO detalleventa(cantidad,precioUnitario,idVenta,idPrenda) VALUES(?,?,?,?)";
+
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, d.getCantidad());
+            ps.setDouble(2, d.getPrecioUnitario());
+            ps.setInt(3, d.getIdVenta());
+            ps.setInt(4, d.getIdPrenda());
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Error detalle venta: " + e.getMessage());
+        }
+    }
+
+    public List<DetalleVenta> consultarDetalleVenta() {
+
+        List<DetalleVenta> lista = new ArrayList<>();
+        String sql = "SELECT * FROM detalleventa";
+
+        try (Connection con = Conexion.getconnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                DetalleVenta d = new DetalleVenta();
+
+                d.setIdDetalle(rs.getInt("idDetalle"));
+                d.setCantidad(rs.getInt("cantidad"));
+                d.setPrecioUnitario(rs.getDouble("precioUnitario"));
+                d.setIdVenta(rs.getInt("idVenta"));
+                d.setIdPrenda(rs.getInt("idPrenda"));
+
+                lista.add(d);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error consultar detalle venta: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    public void actualizarDetalleVenta(DetalleVenta d) {
+
+        String sql = "UPDATE detalleventa SET cantidad=?, precioUnitario=?, idVenta=?, idPrenda=? WHERE idDetalle=?";
+
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, d.getCantidad());
+            ps.setDouble(2, d.getPrecioUnitario());
+            ps.setInt(3, d.getIdVenta());
+            ps.setInt(4, d.getIdPrenda());
+            ps.setInt(5, d.getIdDetalle());
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Error actualizar detalle venta: " + e.getMessage());
+        }
+    }
+
+    public void eliminarDetalleVenta(int id) {
+
+        String sql = "DELETE FROM detalleventa WHERE idDetalle=?";
+
+        try (Connection con = Conexion.getconnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Error eliminar detalle venta: " + e.getMessage());
         }
     }
 }

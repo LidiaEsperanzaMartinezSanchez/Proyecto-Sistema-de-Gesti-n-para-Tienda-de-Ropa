@@ -21,9 +21,10 @@ public class TiendaDeRopa {
             System.out.println("3. Clientes");
             System.out.println("4. Vendedores");
             System.out.println("5. Ventas");
-            System.out.println("6. Exportar TXT");
-            System.out.println("7. Importar TXT");
-            System.out.println("8. Salir");
+            System.out.println("6. Detalle Venta");
+            System.out.println("7. Exportar TXT");
+            System.out.println("8. Importar TXT");
+            System.out.println("9. Salir");
             System.out.print("Opcion: ");
 
             opcion = sc.nextInt();
@@ -31,384 +32,367 @@ public class TiendaDeRopa {
 
             switch (opcion) {
 
-// ================= CATEGORIAS =================
-                case 1:{
-
+                // ================= CATEGORIAS =================
+                case 1: {
                     System.out.println("1. Registrar");
-                    System.out.println("2. Listar");
+                    System.out.println("2. Consultar");
                     System.out.println("3. Actualizar");
                     System.out.println("4. Eliminar");
 
-                    int cat1 = sc.nextInt();
+                    int cat = sc.nextInt();
                     sc.nextLine();
 
-                    if (cat1 == 1) {
-
+                    if (cat == 1) {
                         System.out.print("Nombre: ");
-                        String nombreCat = sc.nextLine();
+                        String nombre = sc.nextLine();
 
                         System.out.print("Descripcion: ");
                         String desc = sc.nextLine();
 
-                        Categoria c = new Categoria(0, nombreCat, desc);
-                        dao.insertarCategoria(c);
-
-                    } else if (cat1 == 2) {
-
-                        for (Categoria ca : dao.listarCategorias()) {
-                            System.out.println(ca.getIdCategoria() + " - " + ca.getNombre());
-                        }
-
-                    } else if (cat1 == 3) {
-
-                        System.out.print("ID Categoria: ");
-                        int idCat = sc.nextInt();
-                        sc.nextLine();
-
-                        System.out.print("Nuevo nombre: ");
-                        String nuevoNombre = sc.nextLine();
-
-                        System.out.print("Nueva descripcion: ");
-                        String descripcion = sc.nextLine();
-
-                        Categoria categoria = new Categoria(idCat, nuevoNombre, descripcion);
-
-                        dao.actualizarCategoria(categoria);
-
-                    } else if (cat1 == 4) {
-
-                        System.out.print("ID Categoria a eliminar: ");
-                        int idEliminar = sc.nextInt();
-
-                        dao.eliminarCategoria(idEliminar);
+                        dao.insertarCategoria(new Categoria(0, nombre, desc));
                     }
 
-                    break;
-                }
-                
-                // ================= PRENDAS =================
-                case 2:{
+                    if (cat == 2) {
+                        for (Categoria c : dao.consultarCategorias()) {
+                            System.out.println(c.getIdCategoria() + " - " + c.getNombre());
+                        }
+                    }
 
-                    System.out.println("\n--- PRENDAS ---");
-                    System.out.println("1. Registrar");
-                    System.out.println("2. Listar");
-                    System.out.println("3. Actualizar stock");
-                    System.out.println("4. Eliminar");
-
-                    int p1 = sc.nextInt();
-                    sc.nextLine();
-
-                    if (p1 == 1) {
+                    if (cat == 3) {
+                        System.out.print("ID: ");
+                        int id = sc.nextInt();
+                        sc.nextLine();
 
                         System.out.print("Nombre: ");
                         String nombre = sc.nextLine();
 
+                        System.out.print("Descripcion: ");
+                        String desc = sc.nextLine();
+
+                        dao.actualizarCategoria(new Categoria(id, nombre, desc));
+                    }
+
+                    if (cat == 4) {
+                        System.out.print("ID: ");
+                        dao.eliminarCategoria(sc.nextInt());
+                    }
+
+                    break;
+                }
+
+                // ================= PRENDAS =================
+                case 2: {
+                    System.out.println("1. Registrar");
+                    System.out.println("2. Consultar");
+                    System.out.println("3. Actualizar stock");
+                    System.out.println("4. Eliminar");
+
+                    int op = sc.nextInt();
+                    sc.nextLine();
+
+                    if (op == 1) {
+                        System.out.print("Nombre: ");
+                        String n = sc.nextLine();
+
                         System.out.print("Talla: ");
-                        String talla = sc.nextLine();
+                        String t = sc.nextLine();
 
                         System.out.print("Color: ");
-                        String color = sc.nextLine();
+                        String c = sc.nextLine();
 
                         System.out.print("Precio: ");
-                        double precio = sc.nextDouble();
+                        double p = sc.nextDouble();
+
+                        System.out.print("Stock: ");
+                        int s = sc.nextInt();
+
+                        System.out.print("ID Categoria: ");
+                        int idCat = sc.nextInt();
+
+                        dao.insertarPrenda(new Prenda(0, n, t, c, p, s, idCat));
+                    }
+
+                    if (op == 2) {
+                        for (Prenda p : dao.consultarPrendas()) {
+                            System.out.println(p.getNombre() + " - $" + p.getPrecio());
+                        }
+                    }
+
+                    if (op == 3) {
+                        System.out.print("ID: ");
+                        int id = sc.nextInt();
 
                         System.out.print("Stock: ");
                         int stock = sc.nextInt();
 
-                        System.out.print("ID Categoria: ");
-                        int idCat = sc.nextInt();
-                        sc.nextLine();
-
-                        if (precio > 0 && stock >= 0) {
-
-                            if (dao.existeCategoria(idCat)) {
-
-                                Prenda p = new Prenda(0, nombre, talla, color, precio, stock, idCat);
-                                dao.insertarPrenda(p);
-
-                                System.out.println("Prenda registrada correctamente");
-
-                            } else {
-                                System.out.println("Categoria no existe");
-                            }
-
-                        } else {
-                            System.out.println("Datos invalidos");
-                        }
-
-                    } else if (p1 == 2) {
-
-                        for (Prenda pr : dao.listarPrendas()) {
-                            System.out.println(pr.getNombre() + " - $" + pr.getPrecio());
-                        }
-
-                    } else if (p1 == 3) {
-
-                        System.out.print("ID prenda: ");
-                        int id = sc.nextInt();
-
-                        System.out.print("Nuevo stock: ");
-                        int stock = sc.nextInt();
-
                         dao.actualizarPrendaStock(id, stock);
+                    }
 
-                    } else if (p1 == 4) {
-
-                        System.out.print("ID a eliminar: ");
-                        int id = sc.nextInt();
-
-                        dao.eliminarPrenda(id);
+                    if (op == 4) {
+                        System.out.print("ID: ");
+                        dao.eliminarPrenda(sc.nextInt());
                     }
 
                     break;
                 }
-                
-                // ================= CLIENTES =================
-                case 3:{
 
-                    System.out.println("\n--- CLIENTES ---");
+                // ================= CLIENTES =================
+                case 3: {
                     System.out.println("1. Registrar");
-                    System.out.println("2. Listar");
+                    System.out.println("2. Consultar");
                     System.out.println("3. Actualizar");
                     System.out.println("4. Eliminar");
 
-                    int c1 = sc.nextInt();
+                    int op = sc.nextInt();
                     sc.nextLine();
 
-                    if (c1 == 1) {
-
+                    if (op == 1) {
                         System.out.print("Nombre: ");
-                        String nombre = sc.nextLine();
+                        String n = sc.nextLine();
 
                         System.out.print("Email: ");
-                        String email = sc.nextLine();
+                        String e = sc.nextLine();
 
                         System.out.print("Telefono: ");
-                        String tel = sc.nextLine();
+                        String t = sc.nextLine();
 
                         System.out.print("Direccion: ");
-                        String dir = sc.nextLine();
+                        String d = sc.nextLine();
 
-                        Cliente c = new Cliente(0, nombre, email, tel, dir);
-                        dao.insertarCliente(c);
-
-                    } else if (c1 == 2) {
-
-                        for (Cliente cl : dao.listarClientes()) {
-                            cl.mostrarDatos();
-                            System.out.println("-------------------");
-                        }
-
-                    } else if (c1 == 3) {
-
-                        System.out.print("ID Cliente: ");
-                        int id = sc.nextInt();
-                        sc.nextLine();
-
-                        System.out.print("Nuevo nombre: ");
-                        String nombre = sc.nextLine();
-
-                        System.out.print("Nuevo email: ");
-                        String email = sc.nextLine();
-
-                        System.out.print("Nuevo telefono: ");
-                        String tel = sc.nextLine();
-
-                        System.out.print("Nueva direccion: ");
-                        String dir = sc.nextLine();
-
-                        Cliente c = new Cliente(id, nombre, email, tel, dir);
-                        dao.actualizarCliente(c);
-
-                    } else if (c1 == 4) {
-
-                        System.out.print("ID a eliminar: ");
-                        int id = sc.nextInt();
-                        dao.eliminarCliente(id);
+                        dao.insertarCliente(new Cliente(0, n, e, t, d));
                     }
 
-                    break;                   
-                }
-                
-                // ================= VENDEDORES =================
-                case 4:{
-
-                    System.out.println("\n--- VENDEDORES ---");
-                    System.out.println("1. Registrar");
-                    System.out.println("2. Listar");
-                    System.out.println("3. Actualizar");
-                    System.out.println("4. Eliminar");
-
-                    int v1 = sc.nextInt();
-                    sc.nextLine();
-
-                    if (v1 == 1) {
-
-                        System.out.print("Nombre: ");
-                        String nombre = sc.nextLine();
-
-                        System.out.print("Email: ");
-                        String email = sc.nextLine();
-
-                        System.out.print("Puesto: ");
-                        String puesto = sc.nextLine();
-
-                        Vendedor v = new Vendedor(0, nombre, email, puesto);
-                        dao.insertarVendedor(v);
-
-                    } else if (v1 == 2) {
-
-                        for (Vendedor ve : dao.listarVendedores()) {
-                            ve.mostrarDatos();
+                    if (op == 2) {
+                        for (Cliente c : dao.consultarClientes()) {
+                            System.out.println(c.getNombre());
                         }
                     }
 
-                    else if (v1 == 3) {
-
-                        System.out.print("ID Vendedor: ");
+                    if (op == 3) {
+                        System.out.print("ID: ");
                         int id = sc.nextInt();
                         sc.nextLine();
 
                         System.out.print("Nombre: ");
-                        String nombre = sc.nextLine();
+                        String n = sc.nextLine();
 
                         System.out.print("Email: ");
-                        String email = sc.nextLine();
+                        String e = sc.nextLine();
 
-                        System.out.print("Puesto: ");
-                        String puesto = sc.nextLine();
+                        System.out.print("Tel: ");
+                        String t = sc.nextLine();
 
-                        Vendedor v = new Vendedor(id, nombre, email, puesto);
+                        System.out.print("Dir: ");
+                        String d = sc.nextLine();
 
-                        dao.actualizarVendedor(v);
-
-                    } else if (v1 == 4) {
-
-                        System.out.print("ID a eliminar: ");
-                        int id = sc.nextInt();
-
-                        dao.eliminarVendedor(id);
+                        dao.actualizarCliente(new Cliente(id, n, e, t, d));
                     }
+
+                    if (op == 4) {
+                        System.out.print("ID: ");
+                        dao.eliminarCliente(sc.nextInt());
+                    }
+
                     break;
                 }
-                
-                // ================= VENTAS =================
 
-                case 5:{
-
-                    System.out.println("\n--- VENTAS ---");
+                // ================= VENDEDORES =================
+                case 4: {
                     System.out.println("1. Registrar");
-                    System.out.println("2. Listar");
+                    System.out.println("2. Consultar");
                     System.out.println("3. Actualizar");
                     System.out.println("4. Eliminar");
 
-                    int ven = sc.nextInt();
+                    int op = sc.nextInt();
                     sc.nextLine();
 
-                    if (ven == 1) {
+                    if (op == 1) {
+                        System.out.print("Nombre: ");
+                        String n = sc.nextLine();
 
-                        System.out.print("Fecha: ");
-                        String fecha = sc.nextLine();
+                        System.out.print("Email: ");
+                        String e = sc.nextLine();
 
-                        System.out.print("Total: ");
-                        double total = sc.nextDouble();
+                        System.out.print("Puesto: ");
+                        String p = sc.nextLine();
+
+                        dao.insertarVendedor(new Vendedor(0, n, e, p));
+                    }
+
+                    if (op == 2) {
+                        for (Vendedor v : dao.consultarVendedores()) {
+                            System.out.println(v.getNombre());
+                        }
+                    }
+
+                    if (op == 3) {
+                        System.out.print("ID: ");
+                        int id = sc.nextInt();
                         sc.nextLine();
 
-                        System.out.print("Metodo de pago: ");
-                        String metodo = sc.nextLine();
+                        System.out.print("Nombre: ");
+                        String n = sc.nextLine();
 
-                        System.out.print("ID Cliente: ");
-                        int idCliente = sc.nextInt();
+                        System.out.print("Email: ");
+                        String e = sc.nextLine();
 
-                        System.out.print("ID Vendedor: ");
-                        int idVendedor = sc.nextInt();
+                        System.out.print("Puesto: ");
+                        String p = sc.nextLine();
 
-                        Venta v = new Venta(0, fecha, total, metodo, idCliente, idVendedor);
+                        dao.actualizarVendedor(new Vendedor(id, n, e, p));
+                    }
 
-                        dao.insertarVenta(v);
+                    if (op == 4) {
+                        System.out.print("ID: ");
+                        dao.eliminarVendedor(sc.nextInt());
+                    }
 
-                    } else if (ven == 2) {
+                    break;
+                }
 
-                        for (Venta ve : dao.listarVentas()) {
+                // ================= VENTAS =================
+                case 5: {
+                    System.out.println("1. Registrar");
+                    System.out.println("2. Consultar");
+                    System.out.println("3. Actualizar");
+                    System.out.println("4. Eliminar");
 
-                            System.out.println("ID Venta: " + ve.getIdVenta());
-                            System.out.println("Fecha: " + ve.getFecha());
-                            System.out.println("Total: $" + ve.getTotal());
-                            System.out.println("Metodo Pago: " + ve.getMetodoPago());
-                            System.out.println("ID Cliente: " + ve.getIdCliente());
-                            System.out.println("ID Vendedor: " + ve.getIdVendedor());
-                            System.out.println("-------------------------");
+                    int op = sc.nextInt();
+                    sc.nextLine();
+
+                    if (op == 1) {
+                        System.out.print("Fecha: ");
+                        String f = sc.nextLine();
+
+                        System.out.print("Total: ");
+                        double t = sc.nextDouble();
+
+                        System.out.print("Metodo: ");
+                        sc.nextLine();
+                        String m = sc.nextLine();
+
+                        System.out.print("Cliente: ");
+                        int c = sc.nextInt();
+
+                        System.out.print("Vendedor: ");
+                        int v = sc.nextInt();
+
+                        dao.insertarVenta(new Venta(0, f, t, m, c, v));
+                    }
+
+                    if (op == 2) {
+                        for (Venta v : dao.consultarVentas()) {
+                            System.out.println(v.getIdVenta() + " - $" + v.getTotal());
                         }
+                    }
 
-                    } else if (ven == 3) {
+                    if (op == 3) {
+                        System.out.print("ID: ");
+                        int id = sc.nextInt();
+                        sc.nextLine();
+
+                        System.out.print("Fecha: ");
+                        String f = sc.nextLine();
+
+                        System.out.print("Total: ");
+                        double t = sc.nextDouble();
+
+                        System.out.print("Metodo: ");
+                        sc.nextLine();
+                        String m = sc.nextLine();
+
+                        System.out.print("Cliente: ");
+                        int c = sc.nextInt();
+
+                        System.out.print("Vendedor: ");
+                        int v = sc.nextInt();
+
+                        dao.actualizarVenta(new Venta(id, f, t, m, c, v));
+                    }
+
+                    if (op == 4) {
+                        System.out.print("ID: ");
+                        dao.eliminarVenta(sc.nextInt());
+                    }
+
+                    break;
+                }
+
+                // ================= DETALLE VENTA =================
+                case 6: {
+                    System.out.println("1. Registrar");
+                    System.out.println("2. Consultar");
+                    System.out.println("3. Actualizar");
+                    System.out.println("4. Eliminar");
+
+                    int op = sc.nextInt();
+
+                    if (op == 1) {
+                        System.out.print("Cantidad: ");
+                        int c = sc.nextInt();
+
+                        System.out.print("Precio Unitario: ");
+                        double p = sc.nextDouble();
 
                         System.out.print("ID Venta: ");
-                        int id = sc.nextInt();
-                        sc.nextLine();
+                        int v = sc.nextInt();
 
-                        System.out.print("Fecha: ");
-                        String fecha = sc.nextLine();
+                        System.out.print("ID Prenda: ");
+                        int pr = sc.nextInt();
 
-                        System.out.print("Total: ");
-                        double total = sc.nextDouble();
-                        sc.nextLine();
+                        dao.insertarDetalleVenta(new DetalleVenta(0, c, p, v, pr));
+                    }
 
-                        System.out.print("Metodo de pago: ");
-                        String metodo = sc.nextLine();
+                    if (op == 2) {
+                        for (DetalleVenta d : dao.consultarDetalleVenta()) {
+                            System.out.println(d.getIdDetalle() + " - Cant: " + d.getCantidad());
+                        }
+                    }
 
-                        System.out.print("ID Cliente: ");
-                        int idCliente = sc.nextInt();
-
-                        System.out.print("ID Vendedor: ");
-                        int idVendedor = sc.nextInt();
-
-                        Venta v = new Venta(id, fecha, total, metodo, idCliente, idVendedor);
-
-                        dao.actualizarVenta(v);
-
-                    } else if (ven == 4) {
-
-                        System.out.print("ID Venta a eliminar: ");
+                    if (op == 3) {
+                        System.out.print("ID: ");
                         int id = sc.nextInt();
 
-                        dao.eliminarVenta(id);
+                        System.out.print("Cantidad: ");
+                        int c = sc.nextInt();
+
+                        System.out.print("Precio: ");
+                        double p = sc.nextDouble();
+
+                        System.out.print("Venta: ");
+                        int v = sc.nextInt();
+
+                        System.out.print("Prenda: ");
+                        int pr = sc.nextInt();
+
+                        dao.actualizarDetalleVenta(new DetalleVenta(id, c, p, v, pr));
+                    }
+
+                    if (op == 4) {
+                        System.out.print("ID: ");
+                        dao.eliminarDetalleVenta(sc.nextInt());
                     }
 
                     break;
                 }
-                
-                // ================= EXPORTAR =================
-                case 6: {
 
-                    ImportarTXT.exportarClientes(dao.listarClientes());
-                    ImportarTXT.exportarPrendas(dao.listarPrendas());
-                    ImportarTXT.exportarVentas(dao.listarVentas());
-
-                    System.out.println("Archivos exportados");
-                    
+                case 7:
+                    System.out.println("Exportando...");
                     break;
-                }
-                // ================= IMPORTAR =================
-                case 7:{
 
-                    ImportarTXT imp = new ImportarTXT();
-                    imp.importarTodo();
-
+                case 8:
+                    System.out.println("Importando...");
                     break;
-                }
-                case 8:{
+
+                case 9:
                     System.out.println("Saliendo...");
                     break;
 
-                }
-
-                default: {
+                default:
                     System.out.println("Opcion invalida");
-                    break;
-                }
             }
 
-        } while (opcion != 8);
+        } while (opcion != 9);
 
         sc.close();
     }

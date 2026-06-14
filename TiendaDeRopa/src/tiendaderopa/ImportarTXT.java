@@ -57,10 +57,10 @@ public class ImportarTXT {
         try (PrintWriter pw = new PrintWriter(new FileWriter("ventas.txt"))) {
 
             for (Venta v : lista) {
-                pw.println("ID Venta: " + v.getIdVenta());
+                pw.println("ID: " + v.getIdVenta());
                 pw.println("Fecha: " + v.getFecha());
-                pw.println("Total: $" + v.getTotal());
-                pw.println("Metodo Pago: " + v.getMetodoPago());
+                pw.println("Total: " + v.getTotal());
+                pw.println("Metodo: " + v.getMetodoPago());
                 pw.println("ID Cliente: " + v.getIdCliente());
                 pw.println("ID Vendedor: " + v.getIdVendedor());
                 pw.println("----------------------");
@@ -73,10 +73,33 @@ public class ImportarTXT {
         }
     }
 
+    // ================= EXPORTAR DETALLE VENTA ======================
+    public static void exportarDetalleVenta(List<DetalleVenta> lista) {
+
+        try (PrintWriter pw = new PrintWriter(new FileWriter("detalleventa.txt"))) {
+
+            for (DetalleVenta d : lista) {
+                pw.println("ID: " + d.getIdDetalle());
+                pw.println("Cantidad: " + d.getCantidad());
+                pw.println("Precio Unitario: " + d.getPrecioUnitario());
+                pw.println("ID Venta: " + d.getIdVenta());
+                pw.println("ID Prenda: " + d.getIdPrenda());
+                pw.println("----------------------");
+            }
+
+            System.out.println("detalleventa.txt generado");
+
+        } catch (Exception e) {
+            System.out.println("Error detalle venta: " + e.getMessage());
+        }
+    }
+
     // ==================== IMPORTAR TODO ======================
     public void importarTodo() {
         importarClientes();
         importarPrendas();
+        importarVentas();
+        importarDetalleVenta();
         System.out.println("Importación completa");
     }
 
@@ -126,7 +149,7 @@ public class ImportarTXT {
         }
     }
 
-    // ================== IMPORTAR PRENDAS =========================0
+    // ================== IMPORTAR PRENDAS =========================
     public void importarPrendas() {
 
         try (BufferedReader br = new BufferedReader(new FileReader("prendas.txt"))) {
@@ -157,7 +180,7 @@ public class ImportarTXT {
                     }
 
                     if (linea.startsWith("Precio:")) {
-                        p.setPrecio(Double.parseDouble(linea.substring(8).replace("$", "").trim()));
+                        p.setPrecio(Double.parseDouble(linea.replace("Precio:", "").replace("$", "").trim()));
                     }
 
                     if (linea.startsWith("Stock:")) {
@@ -169,14 +192,9 @@ public class ImportarTXT {
                     }
 
                     if (linea.startsWith("----------------------")) {
-
-                        // ----- VALIDACIÓN FOREIGN KEY ------------------
                         if (dao.existeCategoria(p.getIdCategoria())) {
                             dao.insertarPrenda(p);
-                        } else {
-                            System.out.println("Categoria no existe: " + p.getIdCategoria());
                         }
-
                         p = null;
                     }
                 }
@@ -184,6 +202,102 @@ public class ImportarTXT {
 
         } catch (Exception e) {
             System.out.println("Error prendas import: " + e.getMessage());
+        }
+    }
+
+    // ================== IMPORTAR VENTAS =========================
+    public void importarVentas() {
+
+        try (BufferedReader br = new BufferedReader(new FileReader("ventas.txt"))) {
+
+            String linea;
+            Venta v = null;
+
+            while ((linea = br.readLine()) != null) {
+
+                linea = linea.trim();
+
+                if (linea.startsWith("ID:")) {
+                    v = new Venta();
+                }
+
+                if (v != null) {
+
+                    if (linea.startsWith("Fecha:")) {
+                        v.setFecha(linea.substring(7).trim());
+                    }
+
+                    if (linea.startsWith("Total:")) {
+                        v.setTotal(Double.parseDouble(linea.substring(7).trim()));
+                    }
+
+                    if (linea.startsWith("Metodo:")) {
+                        v.setMetodoPago(linea.substring(8).trim());
+                    }
+
+                    if (linea.startsWith("ID Cliente:")) {
+                        v.setIdCliente(Integer.parseInt(linea.substring(12).trim()));
+                    }
+
+                    if (linea.startsWith("ID Vendedor:")) {
+                        v.setIdVendedor(Integer.parseInt(linea.substring(13).trim()));
+                    }
+
+                    if (linea.startsWith("----------------------")) {
+                        dao.insertarVenta(v);
+                        v = null;
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error ventas import: " + e.getMessage());
+        }
+    }
+
+    // ================== IMPORTAR DETALLE VENTA =========================
+    public void importarDetalleVenta() {
+
+        try (BufferedReader br = new BufferedReader(new FileReader("detalleventa.txt"))) {
+
+            String linea;
+            DetalleVenta d = null;
+
+            while ((linea = br.readLine()) != null) {
+
+                linea = linea.trim();
+
+                if (linea.startsWith("ID:")) {
+                    d = new DetalleVenta();
+                }
+
+                if (d != null) {
+
+                    if (linea.startsWith("Cantidad:")) {
+                        d.setCantidad(Integer.parseInt(linea.substring(10).trim()));
+                    }
+
+                    if (linea.startsWith("Precio Unitario:")) {
+                        d.setPrecioUnitario(Double.parseDouble(linea.substring(17).trim()));
+                    }
+
+                    if (linea.startsWith("ID Venta:")) {
+                        d.setIdVenta(Integer.parseInt(linea.substring(10).trim()));
+                    }
+
+                    if (linea.startsWith("ID Prenda:")) {
+                        d.setIdPrenda(Integer.parseInt(linea.substring(11).trim()));
+                    }
+
+                    if (linea.startsWith("----------------------")) {
+                        dao.insertarDetalleVenta(d);
+                        d = null;
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error detalle venta import: " + e.getMessage());
         }
     }
 }
