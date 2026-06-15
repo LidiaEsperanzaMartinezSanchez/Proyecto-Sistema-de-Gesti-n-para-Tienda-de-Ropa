@@ -40,10 +40,17 @@ public class TiendaDeRopa {
             switch (opcion) {
 
                 case 1: {
-                    System.out.println("1. Registrar");
+                    // Mostrar categorias antes de desplegar el submenu
+                    System.out.println("--- Categorias disponibles ---");
+                    for (Categoria c : daoCategoria.consultarCategorias()) {
+                        System.out.println(c.getIdCategoria() + " - " + c.getNombre() + " - " + c.getDescripcion());
+                    }
+
+                    System.out.println("\n1. Registrar");
                     System.out.println("2. Consultar");
                     System.out.println("3. Actualizar");
                     System.out.println("4. Eliminar");
+                    System.out.println("5. Regresar");
 
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -56,16 +63,15 @@ public class TiendaDeRopa {
                         String desc = sc.nextLine();
 
                         daoCategoria.insertarCategoria(new Categoria(0, nombre, desc));
+                        System.out.println("Categoria registrada correctamente.");
                     }
 
                     if (op == 2) {
-                        for (Categoria c : daoCategoria.consultarCategorias()) {
-                            System.out.println(c.getIdCategoria() + " - " + c.getNombre());
-                        }
+                        System.out.println("(Lista mostrada arriba)");
                     }
 
                     if (op == 3) {
-                        System.out.print("ID: ");
+                        System.out.print("ID a actualizar: ");
                         int id = sc.nextInt();
                         sc.nextLine();
 
@@ -76,21 +82,39 @@ public class TiendaDeRopa {
                         String desc = sc.nextLine();
 
                         daoCategoria.actualizarCategoria(new Categoria(id, nombre, desc));
+                        System.out.println("Categoria actualizada correctamente.");
                     }
 
                     if (op == 4) {
-                        System.out.print("ID: ");
+                        System.out.print("ID a eliminar: ");
                         daoCategoria.eliminarCategoria(sc.nextInt());
+                        sc.nextLine();
+                        System.out.println("Categoria eliminada correctamente.");
+                    }
+
+                    if (op == 5) {
+                        System.out.println("Regresando...");
                     }
 
                     break;
                 }
 
                 case 2: {
-                    System.out.println("1. Registrar");
+                    // Mostrar prendas antes de desplegar el submenu
+                    System.out.println("--- Prendas disponibles ---");
+                    for (Prenda p : daoPrenda.consultarPrendas()) {
+                        System.out.println(p.getIdPrenda() + " - " + p.getNombre()
+                                + " | Talla: " + p.getTalla()
+                                + " | Color: " + p.getColor()
+                                + " | $" + p.getPrecio()
+                                + " | Stock: " + p.getStock());
+                    }
+
+                    System.out.println("\n1. Registrar");
                     System.out.println("2. Consultar");
                     System.out.println("3. Actualizar stock");
                     System.out.println("4. Eliminar");
+                    System.out.println("5. Regresar");
 
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -120,6 +144,7 @@ public class TiendaDeRopa {
                         int idCat = sc.nextInt();
                         sc.nextLine();
 
+                        // Validar que la categoria exista antes de registrar la prenda
                         if (daoCategoria.existeCategoria(idCat)) {
                             daoPrenda.insertarPrenda(new Prenda(0, n, t, c, p, s, idCat));
                             System.out.println("Prenda registrada correctamente.");
@@ -129,36 +154,49 @@ public class TiendaDeRopa {
                     }
 
                     if (op == 2) {
-                        for (Prenda p : daoPrenda.consultarPrendas()) {
-                            System.out.println(p.getIdPrenda() + " - " + p.getNombre() + " - $" + p.getPrecio());
-                        }
+                        System.out.println("(Lista mostrada arriba)");
                     }
 
                     if (op == 3) {
-                        System.out.print("ID: ");
+                        System.out.print("ID a actualizar stock: ");
                         int id = sc.nextInt();
 
-                        System.out.print("Stock: ");
+                        System.out.print("Nuevo Stock: ");
                         int stock = sc.nextInt();
                         sc.nextLine();
 
                         daoPrenda.actualizarPrendaStock(id, stock);
+                        System.out.println("Stock actualizado correctamente.");
                     }
 
                     if (op == 4) {
-                        System.out.print("ID: ");
+                        System.out.print("ID a eliminar: ");
                         daoPrenda.eliminarPrenda(sc.nextInt());
                         sc.nextLine();
+                        System.out.println("Prenda eliminada correctamente.");
+                    }
+
+                    if (op == 5) {
+                        System.out.println("Regresando...");
                     }
 
                     break;
                 }
 
                 case 3: {
-                    System.out.println("1. Registrar");
+                    // Mostrar clientes antes de desplegar el submenu
+                    System.out.println("--- Clientes disponibles ---");
+                    for (Cliente c : daoCliente.consultarClientes()) {
+                        System.out.println(c.getIdCliente() + " - " + c.getNombre()
+                                + " | " + c.getEmail()
+                                + " | Tel: " + c.getTelefono());
+                    }
+
+                    System.out.println("\n1. Registrar");
                     System.out.println("2. Consultar");
                     System.out.println("3. Actualizar");
                     System.out.println("4. Eliminar");
+                    System.out.println("5. Regresar");
 
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -177,16 +215,15 @@ public class TiendaDeRopa {
                         String d = sc.nextLine();
 
                         daoCliente.insertarCliente(new Cliente(0, n, e, t, d));
+                        System.out.println("Cliente registrado correctamente.");
                     }
 
                     if (op == 2) {
-                        for (Cliente c : daoCliente.consultarClientes()) {
-                            System.out.println(c.getIdCliente() + " - " + c.getNombre());
-                        }
+                        System.out.println("(Lista mostrada arriba)");
                     }
 
                     if (op == 3) {
-                        System.out.print("ID: ");
+                        System.out.print("ID a actualizar: ");
                         int id = sc.nextInt();
                         sc.nextLine();
 
@@ -203,22 +240,37 @@ public class TiendaDeRopa {
                         String d = sc.nextLine();
 
                         daoCliente.actualizarCliente(new Cliente(id, n, e, t, d));
+                        System.out.println("Cliente actualizado correctamente.");
                     }
 
                     if (op == 4) {
-                        System.out.print("ID: ");
+                        System.out.print("ID a eliminar: ");
                         daoCliente.eliminarCliente(sc.nextInt());
                         sc.nextLine();
+                        System.out.println("Cliente eliminado correctamente.");
+                    }
+
+                    if (op == 5) {
+                        System.out.println("Regresando...");
                     }
 
                     break;
                 }
 
                 case 4: {
-                    System.out.println("1. Registrar");
+                    // Mostrar vendedores antes de desplegar el submenu
+                    System.out.println("--- Vendedores disponibles ---");
+                    for (Vendedor v : daoVendedor.consultarVendedores()) {
+                        System.out.println(v.getIdVendedor() + " - " + v.getNombre()
+                                + " | " + v.getEmail()
+                                + " | Puesto: " + v.getPuesto());
+                    }
+
+                    System.out.println("\n1. Registrar");
                     System.out.println("2. Consultar");
                     System.out.println("3. Actualizar");
                     System.out.println("4. Eliminar");
+                    System.out.println("5. Regresar");
 
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -234,16 +286,15 @@ public class TiendaDeRopa {
                         String p = sc.nextLine();
 
                         daoVendedor.insertarVendedor(new Vendedor(0, n, e, p));
+                        System.out.println("Vendedor registrado correctamente.");
                     }
 
                     if (op == 2) {
-                        for (Vendedor v : daoVendedor.consultarVendedores()) {
-                            System.out.println(v.getIdVendedor() + " - " + v.getNombre());
-                        }
+                        System.out.println("(Lista mostrada arriba)");
                     }
 
                     if (op == 3) {
-                        System.out.print("ID: ");
+                        System.out.print("ID a actualizar: ");
                         int id = sc.nextInt();
                         sc.nextLine();
 
@@ -257,22 +308,39 @@ public class TiendaDeRopa {
                         String p = sc.nextLine();
 
                         daoVendedor.actualizarVendedor(new Vendedor(id, n, e, p));
+                        System.out.println("Vendedor actualizado correctamente.");
                     }
 
                     if (op == 4) {
-                        System.out.print("ID: ");
+                        System.out.print("ID a eliminar: ");
                         daoVendedor.eliminarVendedor(sc.nextInt());
                         sc.nextLine();
+                        System.out.println("Vendedor eliminado correctamente.");
+                    }
+
+                    if (op == 5) {
+                        System.out.println("Regresando...");
                     }
 
                     break;
                 }
 
                 case 5: {
-                    System.out.println("1. Registrar");
+                    // Mostrar ventas antes de desplegar el submenu
+                    System.out.println("--- Ventas disponibles ---");
+                    for (Venta v : daoVenta.consultarVentas()) {
+                        System.out.println(v.getIdVenta() + " - Fecha: " + v.getFecha()
+                                + " | Total: $" + v.getTotal()
+                                + " | Metodo: " + v.getMetodoPago()
+                                + " | Cliente ID: " + v.getIdCliente()
+                                + " | Vendedor ID: " + v.getIdVendedor());
+                    }
+
+                    System.out.println("\n1. Registrar");
                     System.out.println("2. Consultar");
                     System.out.println("3. Actualizar");
                     System.out.println("4. Eliminar");
+                    System.out.println("5. Regresar");
 
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -304,6 +372,7 @@ public class TiendaDeRopa {
                         int v = sc.nextInt();
                         sc.nextLine();
 
+                        // Validar que el cliente y vendedor existan antes de registrar la venta
                         if (!daoCliente.existeCliente(c)) {
                             System.out.println("Cliente no existe. Venta no registrada.");
                         } else if (!daoVendedor.existeVendedor(v)) {
@@ -315,16 +384,10 @@ public class TiendaDeRopa {
                     }
 
                     if (op == 2) {
-                        for (Venta v : daoVenta.consultarVentas()) {
-                            System.out.println(v.getIdVenta() + " - " + v.getFecha() + " - $" + v.getTotal());
-                        }
+                        System.out.println("(Lista mostrada arriba)");
                     }
 
                     if (op == 3) {
-                        System.out.println("--- Ventas disponibles ---");
-                        for (Venta ven : daoVenta.consultarVentas()) {
-                            System.out.println(ven.getIdVenta() + " - " + ven.getFecha() + " - $" + ven.getTotal());
-                        }
                         System.out.print("ID venta a actualizar: ");
                         int id = sc.nextInt();
                         sc.nextLine();
@@ -360,24 +423,34 @@ public class TiendaDeRopa {
                     }
 
                     if (op == 4) {
-                        System.out.println("--- Ventas disponibles ---");
-                        for (Venta ven : daoVenta.consultarVentas()) {
-                            System.out.println(ven.getIdVenta() + " - " + ven.getFecha() + " - $" + ven.getTotal());
-                        }
                         System.out.print("ID venta a eliminar: ");
                         daoVenta.eliminarVenta(sc.nextInt());
                         sc.nextLine();
                         System.out.println("Venta eliminada correctamente.");
                     }
 
+                    if (op == 5) {
+                        System.out.println("Regresando...");
+                    }
+
                     break;
                 }
 
                 case 6: {
-                    System.out.println("1. Registrar");
+                    // Mostrar detalles de venta antes de desplegar el submenu
+                    System.out.println("--- Detalles de venta disponibles ---");
+                    for (DetalleVenta d : daoDetalleVenta.consultarDetalleVenta()) {
+                        System.out.println(d.getIdDetalle() + " - Cant: " + d.getCantidad()
+                                + " | Precio unit: $" + d.getPrecioUnitario()
+                                + " | Venta ID: " + d.getIdVenta()
+                                + " | Prenda ID: " + d.getIdPrenda());
+                    }
+
+                    System.out.println("\n1. Registrar");
                     System.out.println("2. Consultar");
                     System.out.println("3. Actualizar");
                     System.out.println("4. Eliminar");
+                    System.out.println("5. Regresar");
 
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -412,17 +485,10 @@ public class TiendaDeRopa {
                     }
 
                     if (op == 2) {
-                        for (DetalleVenta d : daoDetalleVenta.consultarDetalleVenta()) {
-                            System.out.println(d.getIdDetalle() + " - Cant: " + d.getCantidad()
-                                    + " - $" + d.getPrecioUnitario());
-                        }
+                        System.out.println("(Lista mostrada arriba)");
                     }
 
                     if (op == 3) {
-                        System.out.println("--- Detalles disponibles ---");
-                        for (DetalleVenta det : daoDetalleVenta.consultarDetalleVenta()) {
-                            System.out.println(det.getIdDetalle() + " - Cant: " + det.getCantidad() + " - $" + det.getPrecioUnitario());
-                        }
                         System.out.print("ID detalle a actualizar: ");
                         int id = sc.nextInt();
                         sc.nextLine();
@@ -456,14 +522,14 @@ public class TiendaDeRopa {
                     }
 
                     if (op == 4) {
-                        System.out.println("--- Detalles disponibles ---");
-                        for (DetalleVenta det : daoDetalleVenta.consultarDetalleVenta()) {
-                            System.out.println(det.getIdDetalle() + " - Cant: " + det.getCantidad() + " - $" + det.getPrecioUnitario());
-                        }
                         System.out.print("ID detalle a eliminar: ");
                         daoDetalleVenta.eliminarDetalleVenta(sc.nextInt());
                         sc.nextLine();
                         System.out.println("Detalle eliminado correctamente.");
+                    }
+
+                    if (op == 5) {
+                        System.out.println("Regresando...");
                     }
 
                     break;
