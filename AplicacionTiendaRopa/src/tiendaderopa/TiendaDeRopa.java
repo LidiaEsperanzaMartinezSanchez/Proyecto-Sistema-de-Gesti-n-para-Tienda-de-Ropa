@@ -8,7 +8,6 @@ public class TiendaDeRopa {
 
         Scanner sc = new Scanner(System.in);
 
-        // ── DAOs separados ──────────────────────────────────────────────────
         ConsultasCategoria    daoCategoria    = new ConsultasCategoria();
         ConsultasCliente      daoCliente      = new ConsultasCliente();
         ConsultasVendedor     daoVendedor     = new ConsultasVendedor();
@@ -40,7 +39,6 @@ public class TiendaDeRopa {
 
             switch (opcion) {
 
-                // ================= CATEGORIAS =================
                 case 1: {
                     System.out.println("1. Registrar");
                     System.out.println("2. Consultar");
@@ -88,7 +86,6 @@ public class TiendaDeRopa {
                     break;
                 }
 
-                // ================= PRENDAS =================
                 case 2: {
                     System.out.println("1. Registrar");
                     System.out.println("2. Consultar");
@@ -157,7 +154,6 @@ public class TiendaDeRopa {
                     break;
                 }
 
-                // ================= CLIENTES =================
                 case 3: {
                     System.out.println("1. Registrar");
                     System.out.println("2. Consultar");
@@ -218,7 +214,6 @@ public class TiendaDeRopa {
                     break;
                 }
 
-                // ================= VENDEDORES =================
                 case 4: {
                     System.out.println("1. Registrar");
                     System.out.println("2. Consultar");
@@ -273,7 +268,6 @@ public class TiendaDeRopa {
                     break;
                 }
 
-                // ================= VENTAS =================
                 case 5: {
                     System.out.println("1. Registrar");
                     System.out.println("2. Consultar");
@@ -327,7 +321,11 @@ public class TiendaDeRopa {
                     }
 
                     if (op == 3) {
-                        System.out.print("ID: ");
+                        System.out.println("--- Ventas disponibles ---");
+                        for (Venta ven : daoVenta.consultarVentas()) {
+                            System.out.println(ven.getIdVenta() + " - " + ven.getFecha() + " - $" + ven.getTotal());
+                        }
+                        System.out.print("ID venta a actualizar: ");
                         int id = sc.nextInt();
                         sc.nextLine();
 
@@ -341,26 +339,40 @@ public class TiendaDeRopa {
                         System.out.print("Metodo de pago: ");
                         String m = sc.nextLine();
 
+                        System.out.println("--- Clientes disponibles ---");
+                        for (Cliente cli : daoCliente.consultarClientes()) {
+                            System.out.println(cli.getIdCliente() + " - " + cli.getNombre());
+                        }
                         System.out.print("ID Cliente: ");
                         int c = sc.nextInt();
+                        sc.nextLine();
 
+                        System.out.println("--- Vendedores disponibles ---");
+                        for (Vendedor ven : daoVendedor.consultarVendedores()) {
+                            System.out.println(ven.getIdVendedor() + " - " + ven.getNombre());
+                        }
                         System.out.print("ID Vendedor: ");
                         int v = sc.nextInt();
                         sc.nextLine();
 
                         daoVenta.actualizarVenta(new Venta(id, f, t, m, c, v));
+                        System.out.println("Venta actualizada correctamente.");
                     }
 
                     if (op == 4) {
-                        System.out.print("ID: ");
+                        System.out.println("--- Ventas disponibles ---");
+                        for (Venta ven : daoVenta.consultarVentas()) {
+                            System.out.println(ven.getIdVenta() + " - " + ven.getFecha() + " - $" + ven.getTotal());
+                        }
+                        System.out.print("ID venta a eliminar: ");
                         daoVenta.eliminarVenta(sc.nextInt());
                         sc.nextLine();
+                        System.out.println("Venta eliminada correctamente.");
                     }
 
                     break;
                 }
 
-                // ================= DETALLE VENTA =================
                 case 6: {
                     System.out.println("1. Registrar");
                     System.out.println("2. Consultar");
@@ -407,35 +419,56 @@ public class TiendaDeRopa {
                     }
 
                     if (op == 3) {
-                        System.out.print("ID: ");
+                        System.out.println("--- Detalles disponibles ---");
+                        for (DetalleVenta det : daoDetalleVenta.consultarDetalleVenta()) {
+                            System.out.println(det.getIdDetalle() + " - Cant: " + det.getCantidad() + " - $" + det.getPrecioUnitario());
+                        }
+                        System.out.print("ID detalle a actualizar: ");
                         int id = sc.nextInt();
+                        sc.nextLine();
 
                         System.out.print("Cantidad: ");
                         int c = sc.nextInt();
+                        sc.nextLine();
 
                         System.out.print("Precio Unitario: ");
                         double p = sc.nextDouble();
+                        sc.nextLine();
 
+                        System.out.println("--- Ventas disponibles ---");
+                        for (Venta ven : daoVenta.consultarVentas()) {
+                            System.out.println(ven.getIdVenta() + " - " + ven.getFecha() + " - $" + ven.getTotal());
+                        }
                         System.out.print("ID Venta: ");
                         int v = sc.nextInt();
+                        sc.nextLine();
 
+                        System.out.println("--- Prendas disponibles ---");
+                        for (Prenda pre : daoPrenda.consultarPrendas()) {
+                            System.out.println(pre.getIdPrenda() + " - " + pre.getNombre() + " - $" + pre.getPrecio());
+                        }
                         System.out.print("ID Prenda: ");
                         int pr = sc.nextInt();
                         sc.nextLine();
 
                         daoDetalleVenta.actualizarDetalleVenta(new DetalleVenta(id, c, p, v, pr));
+                        System.out.println("Detalle actualizado correctamente.");
                     }
 
                     if (op == 4) {
-                        System.out.print("ID: ");
+                        System.out.println("--- Detalles disponibles ---");
+                        for (DetalleVenta det : daoDetalleVenta.consultarDetalleVenta()) {
+                            System.out.println(det.getIdDetalle() + " - Cant: " + det.getCantidad() + " - $" + det.getPrecioUnitario());
+                        }
+                        System.out.print("ID detalle a eliminar: ");
                         daoDetalleVenta.eliminarDetalleVenta(sc.nextInt());
                         sc.nextLine();
+                        System.out.println("Detalle eliminado correctamente.");
                     }
 
                     break;
                 }
 
-                // ================= EXPORTAR TXT =================
                 case 7: {
                     System.out.println("Exportando...");
                     ImportarTXT.exportarClientes(daoCliente.consultarClientes());
@@ -446,7 +479,6 @@ public class TiendaDeRopa {
                     break;
                 }
 
-                // ================= IMPORTAR TXT =================
                 case 8: {
                     System.out.println("Importando...");
                     importarTXT.importarTodo();

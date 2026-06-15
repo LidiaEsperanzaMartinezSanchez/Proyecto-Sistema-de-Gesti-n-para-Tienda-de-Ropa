@@ -1,16 +1,8 @@
-ID: 4
-Nombre: Pantalon 
-Talla: 5
-Color: rosa
-Precio: $500.0
-Stock: 10
-ID Categoria: 6
-----------------------
-ID: 5
-Nombre: Pantalon
-Talla: 5
-Color: rosa
-Precio: $500.0
-Stock: 10
-ID Categoria: 6
+ID: 1
+Nombre: Boxer
+Talla: M
+Color: Negro
+Precio: $50.0
+Stock: 5
+ID Categoria: 1
 ----------------------
