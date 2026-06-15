@@ -2,32 +2,28 @@ package tiendaderopa;
 
 public class Cliente extends Persona {
 
-    private int idCliente;
     private String telefono;
     private String direccion;
 
     public Cliente() {
         super();
-        this.idCliente = 0;
         this.telefono = "";
         this.direccion = "";
     }
 
     public Cliente(int idCliente, String nombre, String email, String telefono, String direccion) {
-
         super(idCliente, nombre, email);
-
-        this.idCliente = idCliente;
         this.telefono = telefono;
         this.direccion = direccion;
     }
 
+    // Alias que apunta al id de Persona — sin duplicar
     public int getIdCliente() {
-        return idCliente;
+        return this.id;
     }
 
     public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+        this.id = idCliente;
     }
 
     public String getTelefono() {
@@ -49,10 +45,10 @@ public class Cliente extends Persona {
     @Override
     public void mostrarDatos() {
         System.out.println("===== CLIENTE =====");
-        System.out.println("ID: " + idCliente);
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Email: " + email);
-        System.out.println("Telefono: " + telefono);
+        System.out.println("ID: "        + this.id);
+        System.out.println("Nombre: "    + nombre);
+        System.out.println("Email: "     + email);
+        System.out.println("Telefono: "  + telefono);
         System.out.println("Direccion: " + direccion);
     }
 }
