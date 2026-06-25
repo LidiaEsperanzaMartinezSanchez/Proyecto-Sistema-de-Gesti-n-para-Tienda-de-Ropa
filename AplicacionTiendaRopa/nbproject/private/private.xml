@@ -3,22 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/TiendaDeRopa.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/Persona.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/Cliente.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/Categoria.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/Venta.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/Conexion.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/Vendedor.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/Prenda.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/DetalleVenta.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/ConsultasCategoria.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/ConsultasCliente.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/ConsultasDetalleVenta.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/ConsultasPrenda.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/ConsultasVendedor.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/ConsultasVenta.java</file>
-            <file>file:/C:/Users/lidia24/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/ImportarTXT.java</file>
+            <file>file:/C:/Users/webon/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/Conexion.java</file>
+            <file>file:/C:/Users/webon/Documents/GitHub/Proyecto-Sistema-de-Gesti-n-para-Tienda-de-Ropa/AplicacionTiendaRopa/src/tiendaderopa/TiendaDeRopa.java</file>
         </group>
     </open-files>
 </project-private>

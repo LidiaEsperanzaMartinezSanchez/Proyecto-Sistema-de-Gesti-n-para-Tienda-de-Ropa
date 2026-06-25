@@ -1,16 +1,8 @@
 ID: 1
-Nombre: Suerter
-Talla: 6
-Color: Rosa
-Precio: $200.0
-Stock: 20
-ID Categoria: 5
-----------------------
-ID: 2
-Nombre: Pantalon 
-Talla: 5
-Color: Azul
-Precio: $300.0
-Stock: 30
-ID Categoria: 2
+Nombre: Boxer
+Talla: M
+Color: Negro
+Precio: $50.0
+Stock: 5
+ID Categoria: 1
 ----------------------

@@ -1,30 +1,6 @@
 ID: 1
-Nombre: Ana
-Email: ana@gmail.com
-Telefono: 951 123 4567
-Direccion: unsij
-----------------------
-ID: 2
-Nombre: Lidia
-Email: lidia@gmail.com
-Telefono: 951 123 5678
-Direccion: unsij
-----------------------
-ID: 4
-Nombre: Yanet
-Email: yent@gmail.com
-Telefono: 951 123 5768
-Direccion: unsi
-----------------------
-ID: 5
-Nombre: Brenda
-Email: brenda@gmail.com
-Telefono: 951 456 2389
-Direccion: Oaxaca
-----------------------
-ID: 6
-Nombre: Pedro
-Email: pedro@gmail.com
-Telefono: 951 211 2355
-Direccion: Ixtlan 
+Nombre: Juan Perez Perez
+Email: JuanitoAlimaniaco@gmail.com
+Telefono: 9510000123
+Direccion: En algun lugar
 ----------------------
