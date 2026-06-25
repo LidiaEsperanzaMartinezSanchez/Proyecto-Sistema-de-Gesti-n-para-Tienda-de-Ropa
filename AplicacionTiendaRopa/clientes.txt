@@ -1,36 +1,30 @@
-ID: 3
-Nombre: monse
-Email: monse@gmail.com
-Telefono: 234 567 8978
+ID: 1
+Nombre: Ana
+Email: ana@gmail.com
+Telefono: 951 123 4567
+Direccion: unsij
+----------------------
+ID: 2
+Nombre: Lidia
+Email: lidia@gmail.com
+Telefono: 951 123 5678
 Direccion: unsij
 ----------------------
 ID: 4
-Nombre: Ana
-Email: ana@gmail.com
-Telefono: 951 123 2345
-Direccion: unsij
+Nombre: Yanet
+Email: yent@gmail.com
+Telefono: 951 123 5768
+Direccion: unsi
 ----------------------
 ID: 5
-Nombre: Juna
-Email: juan@gmail.com
-Telefono: 951 123 2345
-Direccion: jun@gmail.com
+Nombre: Brenda
+Email: brenda@gmail.com
+Telefono: 951 456 2389
+Direccion: Oaxaca
 ----------------------
 ID: 6
-Nombre: pedro
+Nombre: Pedro
 Email: pedro@gmail.com
-Telefono: 456 123 9870
-Direccion: unsij
-----------------------
-ID: 7
-Nombre: Laura
-Email: laura@gmail.com
-Telefono: 951 123 3456
-Direccion: unsij
-----------------------
-ID: 19
-Nombre: yeni
-Email: yeni@gmail.com
-Telefono: 678 345 2345 
-Direccion: unsij
+Telefono: 951 211 2355
+Direccion: Ixtlan 
 ----------------------

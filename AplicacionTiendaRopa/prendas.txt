@@ -1,32 +1,16 @@
-ID: 4
+ID: 1
+Nombre: Suerter
+Talla: 6
+Color: Rosa
+Precio: $200.0
+Stock: 20
+ID Categoria: 5
+----------------------
+ID: 2
 Nombre: Pantalon 
 Talla: 5
-Color: rosa
-Precio: $500.0
-Stock: 10
-ID Categoria: 6
-----------------------
-ID: 5
-Nombre: Pantalon
-Talla: 5
-Color: rosa
-Precio: $500.0
-Stock: 10
-ID Categoria: 6
-----------------------
-ID: 6
-Nombre: Pantalon
-Talla: 5
-Color: rosa
-Precio: $500.0
-Stock: 10
-ID Categoria: 6
-----------------------
-ID: 7
-Nombre: Pantalon
-Talla: 5
-Color: rosa
-Precio: $500.0
-Stock: 10
-ID Categoria: 6
+Color: Azul
+Precio: $300.0
+Stock: 30
+ID Categoria: 2
 ----------------------

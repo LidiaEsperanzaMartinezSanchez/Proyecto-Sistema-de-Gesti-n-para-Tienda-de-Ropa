@@ -85,7 +85,7 @@ public class ConsultasCategoria {
         }
     }
     
-    // ===== EXISTE CATEGORIA (CORREGIDO) =====
+    // ===== EXISTE CATEGORIA  =====
     public boolean existeCategoria(int idCategoria) {
 
         String sql = "SELECT idCategoria FROM categoria WHERE idCategoria=?";
