@@ -1,6 +1,0 @@
-ID: 1
-Nombre: Juan Perez Perez
-Email: JuanitoAlimaniaco@gmail.com
-Telefono: 9510000123
-Direccion: En algun lugar
-----------------------
