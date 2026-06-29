@@ -1,8 +1,0 @@
-ID: 1
-Nombre: Boxer
-Talla: M
-Color: Negro
-Precio: $50.0
-Stock: 5
-ID Categoria: 1
-----------------------

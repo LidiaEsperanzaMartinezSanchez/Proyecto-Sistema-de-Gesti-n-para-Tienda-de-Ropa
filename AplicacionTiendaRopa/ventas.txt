@@ -1,7 +1,0 @@
-ID: 1
-Fecha: 2026-06-15 14:30:00
-Total: 600.0
-Metodo: tarjeta
-ID Cliente: 1
-ID Vendedor: 2
-----------------------

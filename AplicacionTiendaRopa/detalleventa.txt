@@ -1,6 +1,0 @@
-ID: 1
-Cantidad: 600
-Precio Unitario: 300.0
-ID Venta: 1
-ID Prenda: 2
-----------------------
